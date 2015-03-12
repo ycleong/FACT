@@ -21,7 +21,7 @@ body {
   text-align: center;
 }
 
-#learn1, #against, #for{
+#learn1, #joint1, #against, #for{
 display:none;
 }
 
@@ -55,16 +55,6 @@ button[disabled] {
 
 #logo-text {
   font-weight: bold;
-}
-
-
-#odd-key, #even-key, #key {
-  background-color: #e3e3e3;
-  padding: 2px;
-  border: 1px outset #cccccc;
-  font-family: Courier New;
-  font-weight: bold;
-  font-size: 15px;
 }
 
 .block-text {
@@ -170,10 +160,6 @@ color: #ce0000;
     font-size: 18px;
     text-align: center;
     line-height: 26px;
-}
-
-#form {
-    text-align: center;
 }
 
 #infoQ, #typeEst {
