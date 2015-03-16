@@ -81,7 +81,7 @@ function get_AdvisorOrder(){
 // Generate sequences of advisor outcomes
 function get_AdvisorCorrect(nTrials,PctCorrect){
   AdvisorCorrect = _.range(nTrials*PctCorrect).map(function(){return 1});
-  AdvisorWrong = _.range(nTrials*(1-PctCorrect)).map(function(){return 0);
+  AdvisorWrong = _.range(nTrials*(1-PctCorrect)).map(function(){return 0});
   AdvisorCorrect = AdvisorCorrect.concat(AdvisorWrong);
   AdvisorCorrect = AdvisorCorrect.shuffle();
 
