@@ -80,8 +80,8 @@ function get_AdvisorOrder(){
 
 // Generate sequences of advisor outcomes
 function get_AdvisorCorrect(nTrials,PctCorrect){
-  AdvisorCorrect = Array.apply(null, new Array(nTrials*PctCorrect)).map(Number.prototype.valueOf,1);
-  AdvisorWrong = Array.apply(null, new Array(nTrials*(1-PctCorrect))).map(Number.prototype.valueOf,0);
+  AdvisorCorrect = _.range(nTrials*PctCorrect).map(function(){return 1});
+  AdvisorWrong = _.range(nTrials*(1-PctCorrect)).map(function(){return 0);
   AdvisorCorrect = AdvisorCorrect.concat(AdvisorWrong);
   AdvisorCorrect = AdvisorCorrect.shuffle();
 
