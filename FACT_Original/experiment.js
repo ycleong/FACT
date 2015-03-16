@@ -717,16 +717,22 @@ selfreport: function(){
 demographics: function() {
  
   analyst = [];
+  foil = [];
   $("#tally_id3").html(experiment.tally);
 
   self = $("input[name = 'selfacc']").val();
   analyst[jQuery.inArray(1, experiment.face_order)] = $("input[name = 'analyst1acc']").val();
   analyst[jQuery.inArray(2, experiment.face_order)] = $("input[name = 'analyst2acc']").val();
   analyst[jQuery.inArray(3, experiment.face_order)] = $("input[name = 'analyst3acc']").val();
+  
+  foil[0] = $("input[name = 'foil1acc']").val();
+  foil[1] = $("input[name = 'foil2acc']").val();
+  foil[2] = $("input[name = 'foil2acc']").val();
 
   experiment.selfreport_data = {
     self: self,
-    analyst: analyst
+    analyst: analyst,
+    foil: foil
   }
 
   // Show the finish slide.

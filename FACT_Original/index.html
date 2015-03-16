@@ -64,6 +64,9 @@
 			face1 = new Image();
 			face2 = new Image();
 			face3 = new Image();
+			foil1 = new Image();
+			foil2 = new Image();
+			foil3 = new Image();
 
 			logo1.src = "images/logo1.png";
 			logo2.src = "images/logo2.png";
@@ -74,6 +77,10 @@
 			face1.src = "images/face1.png"
 			face2.src = "images/face2.png"
 			face3.src = "images/face3.png"
+			foil1.src = "images/face4.png"
+			foil2.src = "images/face5.png"
+			foil3.src = "images/face6.png"
+
 		}
 		//--><!]]>
 		</script>
@@ -252,33 +259,39 @@
 			<input type="text" name="selfacc"><br>
 		</p>
 
-		<p class = 'block-text'>2. How accurate do you think this analyst was at predicting the stock (0-100%)?<br>
-			</p>
-
-			<img id="analyst1" height = "220"></img>
-
-
-		<p class = 'block-text'>Please enter a number from 0 to 100:<br>
-			<input type="text" name="analyst1acc">
+		<p class = 'block-text'>2. How accurate do you think the following analysts were at predicting the stock (0-100%)? If you saw the analyst during this experiment, enter a number from 1-100. Otherwise, please leave the field BLANK. <br>
 		</p>
 
-		<p class = 'block-text'>3. How accurate do you think this analyst was at predicting the stock (0-100%)?<br><br>
-</p>
-		<img id="analyst2" height = "220"></img>
+		<table align="center">
+    <tr>
+        <td align = "center"><img height = "220" src = "images/face4.png"></img></td>
+        <td align = "center"><img id="analyst3" height = "220"></img></td>
+        <td align = "center"><img id="analyst2" height = "220"></img></td> 
+    </tr>
 
-		<p class = 'block-text'>
-			Please enter a number from 0 to 100:<br>
-			<input type="text" name="analyst2acc">
-		</p>
+    <tr>
+    	<td align = "center"><input type="text" name="foil1acc"></td>
+    	<td align = "center"><input type="text" name="analyst3acc"></td>
+    	<td align = "center"><input type="text" name="analyst2acc"></td>
+    </tr>
+    <tr>
+    </tr>
 
-		<p class = 'block-text'>4. How accurate do you think this analyst was at predicting the stock (0-100%)?<br><br>
-		</p>
+    <tr>
+    	<td align = "center"><img id="analyst1" height = "220"></img></td>
+    	<td align = "center"><img height = "220" src = "images/face5.png"></img></td>
+    	<td align = "center"><img height = "220" src = "images/face6.png"></img></td>
+    </tr>
 
-			<img id="analyst3" height = "220"></img>
-<p class = 'block-text'>
-			Please enter a number from 0 to 100:<br>
-			<input type="text" name="analyst3acc">
-		</p>
+    <tr>
+    	<td align = "center"><input type="text" name="analyst1acc"></td>
+    	<td align = "center"><input type="text" name="foil2acc"></td>
+    	<td align = "center"><input type="text" name="foil3acc"></td>
+    </tr>
+
+
+    </table>
+			
 
 	</form>
 
@@ -329,18 +342,4 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
