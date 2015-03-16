@@ -166,9 +166,18 @@ description3: function() {
 
 startPrivate: function(){
   var nTrials = experiment.nTrials_Private;
-  var pUP_private = gen_pUP(nTrials);
-  var trial_num = 0;
+  //var pUP_private = gen_pUP(nTrials);
+  
+  ups = _.range(18).map(function(){return 0.75});
+  downs = _.range(18).map(function(){return 0.25});
+  
+  if (Math.random() < 0.5)
+    {var pUP_private = ups.concat(downs);}
+  else 
+    {var pUP_private = downs.concat(ups);}
 
+
+  var trial_num = 0;
   var parms_private = {
     nTrials: nTrials,
     pUP: pUP_private
@@ -383,7 +392,16 @@ learn_description: function(){
 
 startSocial: function(){
   var nTrials = experiment.nTrials_Social;
-  var pUP_Social = gen_pUP(nTrials);
+  //var pUP_Social = gen_pUP(nTrials);
+  
+  ups = _.range(15).map(function(){return 0.75});
+  downs = _.range(15).map(function(){return 0.25});
+
+  if (Math.random() < 0.5)
+    {var pUP_Social = ups.concat(downs,ups,downs);}
+  else 
+    {var pUP_Social = downs.concat(ups,downs,ups);}
+
   var trial_num = 0;  
   var AdvisorOrder = get_AdvisorOrder();
   var FaceOrder = experiment.face_order;
@@ -568,7 +586,16 @@ joint_description: function(){
 
   startJoint: function(){
   var nTrials = experiment.nTrials_Joint;
-  var pUP = gen_pUP(nTrials);
+  //var pUP = gen_pUP(nTrials);
+
+    ups = _.range(nTrials/4).map(function(){return 0.75});
+  downs = _.range(nTrials/4).map(function(){return 0.25});
+
+  if (Math.random() < 0.5)
+    {var pUP = ups.concat(downs,ups,downs);}
+  else 
+    {var pUP = downs.concat(ups,downs,ups);}
+  
   var trial_num = 0;  
   var AdvisorOrder = get_AdvisorOrder();
   var FaceOrder = experiment.face_order;
