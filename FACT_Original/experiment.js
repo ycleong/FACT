@@ -114,7 +114,9 @@ var experiment = {
   age:"",
   comments:"",
 
-  data: [],
+  dataPrivate: [],
+  dataSocial: [],
+  dataJoint:[],
 
 // Goes to description slide
 description: function() {
@@ -182,7 +184,7 @@ startPrivate: function(){
     nTrials: nTrials,
     pUP: pUP_private
   }
-  experiment.data.push(parms_private)
+  experiment.dataPrivate.push(parms_private)
   experiment.choice_screen(pUP_private,"private",trial_num)
 },
 
@@ -234,7 +236,7 @@ choice_screen: function(pUP,type,trial_num) {
         rt: endTime - startTime,
         tally: experiment.tally
       }
-       experiment.data.push(data)
+       experiment.dataPrivate.push(data)
        setTimeout(function(){experiment.stock_outcome(stock_outcome);}, experiment.OutcomeTime);
        setTimeout(function(){experiment.player_outcome(outcome);}, experiment.OutcomeTime*2);
        setTimeout(function(){experiment.choice_screen(pUP,type,trial_num);},experiment.OutcomeTime*3);
@@ -258,7 +260,7 @@ choice_screen: function(pUP,type,trial_num) {
         rt: endTime - startTime,
         tally: experiment.tally
       }
-      experiment.data.push(data)
+      experiment.dataPrivate.push(data)
       setTimeout(function(){experiment.stock_outcome(stock_outcome);}, experiment.OutcomeTime);
       setTimeout(function(){experiment.player_outcome(outcome);}, experiment.OutcomeTime*2);
       setTimeout(function(){experiment.choice_screen(pUP,type,trial_num);},experiment.OutcomeTime*3);
@@ -296,6 +298,7 @@ player_outcome: function(outcome){
         rt: NaN,
         tally: experiment.tally
       }
+      experiment.dataPrivate.push(data)
       showSlide("slow")
       $(document).unbind("keydown");
       setTimeout(function(){experiment.choice_screen(pUP,type,trial_num);}, experiment.OutcomeTime)
@@ -316,7 +319,7 @@ player_outcome: function(outcome){
         Advice: NaN,
         AdvisorCorrect: NaN
       }
-      experiment.data.push(data)
+      experiment.dataSocial.push(data)
 
       showSlide("slow")
       $(document).unbind("keydown");
@@ -338,7 +341,7 @@ player_outcome: function(outcome){
         Advice: NaN,
         AdvisorCorrect: NaN
       }
-      experiment.data.push(data)
+      experiment.dataJoint.push(data)
 
       showSlide("slow")
       $(document).unbind("keydown");
@@ -418,7 +421,7 @@ startSocial: function(){
     Advisor2Correct: Advisor2Correct,
     Advisor3Correct: Advisor3Correct
   }
-  experiment.data.push(parms_social)
+  experiment.dataSocial.push(parms_social)
   experiment.social_screen(pUP_Social,"social",trial_num,FaceOrder,AdvisorOrder,Advisor1Correct,Advisor2Correct,Advisor3Correct)
 },
 
@@ -502,7 +505,7 @@ social_screen: function(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correc
         Advice: Advice,
         AdvisorCorrect: this_AdvisorCorrect
       }
-       experiment.data.push(data);
+       experiment.dataSocial.push(data);
        setTimeout(function(){experiment.advice_screen(Advice);}, experiment.OutcomeTime);
        setTimeout(function(){experiment.stock_outcome(stock_outcome);}, experiment.OutcomeTime*2);
        setTimeout(function(){experiment.player_outcome(outcome);}, experiment.OutcomeTime*3);
@@ -530,7 +533,7 @@ social_screen: function(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correc
         Advice: Advice,
         AdvisorCorrect: this_AdvisorCorrect
       }
-      experiment.data.push(data)
+      experiment.dataSocial.push(data)
       setTimeout(function(){experiment.advice_screen(Advice);}, experiment.OutcomeTime);
       setTimeout(function(){experiment.stock_outcome(stock_outcome);}, experiment.OutcomeTime*2);
       setTimeout(function(){experiment.player_outcome(outcome);}, experiment.OutcomeTime*3);
@@ -613,7 +616,7 @@ joint_description: function(){
     Advisor2Correct: Advisor2Correct,
     Advisor3Correct: Advisor3Correct
   }
-  experiment.data.push(parms_joint)
+  experiment.dataJoint.push(parms_joint)
   experiment.joint_screen(pUP,"joint",trial_num,FaceOrder,AdvisorOrder,Advisor1Correct,Advisor2Correct,Advisor3Correct)
 },
 
@@ -654,15 +657,16 @@ joint_screen: function(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct
   else
     {var Advice = stock_outcome*-1;}
 
-  experiment.advice_screen(Advice);
-
-  setTimeout(function(){showSlide("choice_screen")},1500);
-  setTimeout(function(){$(".left").show()},1500);
-  setTimeout(function(){$(".right").show()},1500);
-
   if (typeof this_pUP == "undefined") {
     return experiment.selfreport();
   }
+
+  experiment.advice_screen(Advice);
+
+  setTimeout(function(){
+    showSlide("choice_screen");
+    $(".left").show();
+    $(".right").show();},1500)
 
   $(".pUP_id").html(this_pUP);
   $(".StockOutcome_id").html([stock_outcome]);
@@ -695,7 +699,7 @@ joint_screen: function(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct
         Advice: Advice,
         AdvisorCorrect: this_AdvisorCorrect
       }
-       experiment.data.push(data);
+       experiment.dataJoint.push(data);
 
        setTimeout(function(){experiment.stock_outcome(stock_outcome);}, experiment.OutcomeTime);
        setTimeout(function(){experiment.player_outcome(outcome);}, experiment.OutcomeTime*2);
@@ -723,7 +727,7 @@ joint_screen: function(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct
         Advice: Advice,
         AdvisorCorrect: this_AdvisorCorrect
       }
-      experiment.data.push(data)
+      experiment.dataJoint.push(data)
       setTimeout(function(){experiment.stock_outcome(stock_outcome);}, experiment.OutcomeTime);
       setTimeout(function(){experiment.player_outcome(outcome);}, experiment.OutcomeTime*2);
       setTimeout(function(){experiment.joint_screen(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct,Advisor2Correct,Advisor3Correct);}, experiment.OutcomeTime*3);
