@@ -3,7 +3,7 @@
 	<title> Start Page </title>
 
 	<script src="https://www.stanford.edu/~ycleong/common/jquery-1.11.1.min.js"></script>
-	<script src="https://www.stanford.edu/~ycleong/common/mmturkey.0.5.js"></script>
+	<script src="https://www.stanford.edu/~ycleong/common/mmturkey.js"></script>
 	<script src="https://cdn.jsdelivr.net/jstat/1.1.3/jstat.min.js"></script>
 	<script src="underscore-min.js"></script>
 	<link rel="stylesheet" href="style/style.css" />
@@ -125,7 +125,7 @@
 
 		<img src = "images/outcomes.png"></img>
 
-		<p class="block-text"> If you guessed correctly, you will win 1 cent. If you guessed wrongly, you will lose 1 cent. This money will be a performance bonus on top of the two dollars you will receive for this experiment. Try to earn as much extra money as possible.</p> 
+		<p class="block-text"> If you guessed correctly, you will win 2 cents. If you guessed wrongly, you will lose 2 cents. This money will be a performance bonus on top of the two dollars you will receive for this experiment. Try to earn as much extra money as possible.</p> 
 
 		<p class='block-text'>Tips: When the price of a stock is going up, it tends to keep going up (but not always) </p>
 
@@ -171,7 +171,7 @@
 
 	<!-- Learning Instructions -->
 	<div class ="slide" id="end_private">
-		<p class = 'block-text'>Congratulations! You are done with Part 1 of the experiment. <br><br>So far, you have earned a bonus of <span id = "tally_id">{{}}</span> cents.</p>
+		<p class = 'block-text'>You are done with Part 1 of the experiment!</p>
 
 		<p class = 'block-text'>In Part 2 of the experiment, you will evaluate the performance of other analysts playing the task. In each time period, you will be presented with a photo of an analyst. He will make a prediction about whether the stock will go up or go down. Prior to seeing his prediction, you will have to guess if his prediction will be accurate.</p>
 
@@ -188,8 +188,8 @@
 			<p class = "logo"><img src = "images/UP.png"></img></p>
 			<p class = 'logo-text'><span class = "green">The stock went up!</span></p>
 
-			<p class = 'block-text' id = "against">His prediction was incorrect. Since you voted AGAINST him, you would be correct and earn 1 cent.</p>
-			<p class = 'block-text' id = "for">His prediction was incorrect. Since you voted FOR him, you would be incorrect and lose 1 cent.</p>
+			<p class = 'block-text' id = "against">His prediction was incorrect. Since you voted AGAINST him, you would be correct and earn 2 cents.</p>
+			<p class = 'block-text' id = "for">His prediction was incorrect. Since you voted FOR him, you would be incorrect and lose 2 cents.</p>
 
 			<p class = 'block-text'>Remember, you are rewarded for correctly guessing if his prediction is correct. The actual performance of the stock doesn't matter. In the actual experiment, you will see the choices of three analysts. Some analysts are more accurate than others. You will have to figure this out over time.</p>
 
@@ -224,7 +224,7 @@
 
 <!-- Joint Instructions -->
 <div class ="slide" id="end_social">
-	<p class = 'block-text'>Congratulations! You are done with Part 2 of the experiment. <br><br>So far, you have earned a bonus of <span id = "tally_id2">{{}}</span> cents.</p>
+	<p class = 'block-text'>You are done with Part 2 of the experiment!</p>
 
 	<p class = 'block-text'>In the final part of the experiment, you will again be predicting the price fluctuation of the stock based on its past performance. However, this time round, you will also have the predictions of other analysts to help you. Both you and the other analysts will be following the stock of Rebel Fusion Industries.</p>
 

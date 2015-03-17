@@ -749,7 +749,8 @@ demographics: function() {
  
   analyst = [];
   foil = [];
-  $("#tally_id3").html(experiment.tally);
+  bonus = experiment.tally * 2;
+  $("#tally_id3").html(bonus);
 
   self = $("input[name = 'selfacc']").val();
   analyst[jQuery.inArray(1, experiment.face_order)] = $("input[name = 'analyst1acc']").val();
@@ -780,8 +781,6 @@ demographics: function() {
     checkboxValues.push($(elem).val());
   });
   experiment.race = checkboxValues;
-
-
 
 
   // Show the finish slide.
