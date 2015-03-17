@@ -276,7 +276,7 @@ stock_outcome: function(stock_outcome){
 
 player_outcome: function(outcome){
   var outcome_text = (outcome == 1) ? "correct" : "wrong";
-  var outcome_points = (outcome == 1) ? "+ 1 cent" : "- 1 cent"
+  var outcome_points = (outcome == 1) ? "+ 2 cents" : "- 2 cents"
 
   $("#Outcome_text_id").html(outcome_text);
   $("#Outcome_points_id").html(outcome_points);
