@@ -250,6 +250,7 @@ choice_screen: function(pUP,type,trial_num) {
       var outcome = (stock_outcome == 1) ? -1:1;
       $("#PlayerOutcome_id").html(outcome);
       experiment.tally = experiment.tally + outcome;
+      var endTime = (new Date()).getTime();
       var data = {
         type: type,
         trial_num: trial_num, 
@@ -520,6 +521,8 @@ social_screen: function(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correc
       var outcome = (this_AdvisorCorrect) ? -1:1;
       $("#PlayerOutcome_id").html(outcome);
       experiment.tally = experiment.tally + outcome;
+      var endTime = (new Date()).getTime();
+      
       var data = {
         type: type,
         trial_num: trial_num, 
@@ -714,6 +717,7 @@ joint_screen: function(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct
       var outcome = (stock_outcome==1) ? -1:1;
       $("#PlayerOutcome_id").html(stock_outcome);
       experiment.tally = experiment.tally + outcome;
+      var endTime = (new Date()).getTime();
       var data = {
         type: type,
         trial_num: trial_num, 
@@ -773,6 +777,8 @@ demographics: function() {
   },
 
   end: function() {
+  bonus = experiment.tally * 2;
+  $("#tally_id4").html(bonus);
   experiment.gender = $('input[name="genderButton"]:checked').val();
   experiment.age = $("input[name = 'age']").val();
   experiment.comments = $('textarea[name="commentsTextArea"]').val();
