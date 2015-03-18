@@ -753,7 +753,9 @@ demographics: function() {
  
   analyst = [];
   foil = [];
-  bonus = experiment.tally * 2;
+
+  if (experiment.tally > 5) {bonus = experiment.tally * 2;} else{ bonus = 10}
+
   $("#tally_id3").html(bonus);
 
   self = $("input[name = 'selfacc']").val();
@@ -777,7 +779,7 @@ demographics: function() {
   },
 
   end: function() {
-  bonus = experiment.tally * 2;
+  if (experiment.tally > 5) {bonus = experiment.tally * 2;} else{bonus = 10;}
   $("#tally_id4").html(bonus);
   experiment.gender = $('input[name="genderButton"]:checked').val();
   experiment.age = $("input[name = 'age']").val();
