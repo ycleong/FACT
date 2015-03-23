@@ -116,7 +116,7 @@ var experiment = {
   nTrials_Joint: 60,
   tally: 0,
   bonus: 0,
-  condition: "alogorithm",
+  condition: _.sample(["advisor","algorithm"]),
   face_order: _.shuffle([1, 2, 3, 4, 5, 6], 3),
   
   OutcomeTime: 1000,
@@ -423,7 +423,7 @@ learn_description: function(){
   //stop editing here to look for fractal iamges
 
   temp = "In Part 2 of the experiment, you will evaluate how well different computer algorithms predict the stock. " +
-  "In each time period, you will be presented with an image that represents a computer algorithm. " +
+  "In each time period, you will be presented with an icon that represents a computer algorithm. " +
   "The algorithm will provide a prediction about whether the stock will go up or go down. " +
   "Prior to seeing this prediction, you will have to guess if the prediction will be accurate.";
 
