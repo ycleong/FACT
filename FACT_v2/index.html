@@ -147,7 +147,7 @@
 
 	<!-- Outcome -->
 	<div class="slide" id="outcome_page">
-		<p class='logo-text'><br><br><br><br>You were <span id = "Outcome_text_id">{{}}</span>!</p>
+		<p class='logo-text'><br><br><br><br><span id = "Outcome_text_id">{{}}</span></p>
 		<p class='logo-text'><span id = "Outcome_points_id">{{}}</span></p>
 	</div>
 
@@ -176,9 +176,11 @@
 			<p class = 'block-text' id = "against">The <span class = "noun">{{}}</span> was incorrect. Since you voted AGAINST the <span class = "noun">{{}}</span>, you would be correct and earn 4 cents.</p>
 			<p class = 'block-text' id = "for">The <span class = "noun">{{}}</span> was incorrect. Since you voted FOR the <span class = "noun">{{}}</span>, you would be incorrect and lose 4 cents.</p>
 
-			<p class = 'block-text'>Remember, you are rewarded for correctly guessing if the <span class = "noun">{{}}</span> will make a correct prediction. The actual performance of the stock doesn't matter. In the actual experiment, you will see the choices of three <span class = "noun">{{}}</span>s. Some <span class = "noun">{{}}</span>s are more accurate than others. You will have to figure this out over time.</p>
+			<p class = 'block-text'>Remember, you are rewarded for correctly guessing if the <span class = "noun">{{}}</span> will make a correct prediction. The actual performance of the stock doesn't matter. In the actual experiment, you will see the choices of three <span class = "noun">{{}}</span>s. Some <span class = "noun">{{}}</span>s are more accurate than others. You will have to figure this out over time. Please do not press the "continue" button below. </p>
 
-			<p class='block-text'> Whenever you feel ready to start Part 2, press "G" to proceed.</p>
+		<p class='block-text'> Whenever you feel ready to start Part 2, press "G" to proceed. Again, please do not press the "continue" button.</p>
+
+		<button type="button" onclick="this.blur(); experiment.startSocial()">Continue</button>
 		</div> 
 	</div>
 </div>
@@ -230,9 +232,12 @@
 		<p class = "logo"><img src = "images/UP.png"></img></p>
 		<p class = 'logo-text'><span class = "green">The stock went up!</span></p>
 
-		<p class = 'block-text'>Remember, you are rewarded for correctly guessing whether the stock goes UP or DOWN. Try to be as accurate as possible.</p>
+		<p class = 'block-text'>Remember, you are rewarded for correctly guessing whether the stock goes UP or DOWN. Try to be as accurate as possible. Please do not press the "continue" button below.</p>
 
-		<p class='block-text'> Whenever you feel ready to start Part 3, press "G" to proceed.</p>
+		<p class='block-text'> Whenever you feel ready to start Part 3, press "G" to proceed. Again, please do not press the "continue" button.</p>
+
+		<button type="button" onclick="this.blur(); experiment.startJoint()">Continue</button>
+
 	</div> 
 </div>
 </div>

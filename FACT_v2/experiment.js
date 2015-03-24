@@ -116,6 +116,8 @@ var experiment = {
   nTrials_Joint: 60,
   tally: 0,
   bonus: 0,
+  AC1 : "Fail",
+  AC2 : "Fail",
   condition: _.sample(["advisor","algorithm"]),
   face_order: _.shuffle([1, 2, 3, 4, 5, 6], 3),
   
@@ -289,7 +291,7 @@ stock_outcome: function(stock_outcome){
 },
 
 player_outcome: function(outcome){
-  var outcome_text = (outcome == 1) ? "correct" : "wrong";
+  var outcome_text = (outcome == 1) ? "You were correct!" : "Sorry, you were wrong.";
   var outcome_points = (outcome == 1) ? "+ 4 cents" : "- 4 cents"
 
   $("#Outcome_text_id").html(outcome_text);
@@ -455,6 +457,7 @@ learn_description: function(){
       var keyCode = event.which;
       if (keyCode == 71) {
         $(document).unbind("keydown");
+        experiment.AC1 = "Pass";
         experiment.startSocial();}
       })
     }
@@ -469,6 +472,7 @@ learn_description: function(){
       var keyCode = event.which;
       if (keyCode == 71) {
         $(document).unbind("keydown");
+        experiment.AC1 = "Pass";
         experiment.startSocial();}
       })
     }})
@@ -657,6 +661,7 @@ joint_description: function(){
       var keyCode = event.which;
       if (keyCode == 71) {
         $(document).unbind("keydown");
+        experiment.AC2 = "Pass";
         experiment.startJoint();}
       })
     }
@@ -671,6 +676,7 @@ joint_description: function(){
       var keyCode = event.which;
       if (keyCode == 71) {
         $(document).unbind("keydown");
+        experiment.AC2 = "Pass";
         experiment.startJoint();}
       })
     }})
