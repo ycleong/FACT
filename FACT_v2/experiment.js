@@ -1,3 +1,121 @@
+var BrowserDetect = {
+  init: function () {
+    this.browser = this.searchString(this.dataBrowser) || "An unknown browser";
+    this.version = this.searchVersion(navigator.userAgent)
+      || this.searchVersion(navigator.appVersion)
+      || "an unknown version";
+    this.OS = this.searchString(this.dataOS) || "an unknown OS";
+  },
+  searchString: function (data) {
+    for (var i=0;i<data.length;i++) {
+      var dataString = data[i].string;
+      var dataProp = data[i].prop;
+      this.versionSearchString = data[i].versionSearch || data[i].identity;
+      if (dataString) {
+        if (dataString.indexOf(data[i].subString) != -1)
+          return data[i].identity;
+      }
+      else if (dataProp)
+        return data[i].identity;
+    }
+  },
+  searchVersion: function (dataString) {
+    var index = dataString.indexOf(this.versionSearchString);
+    if (index == -1) return;
+    return parseFloat(dataString.substring(index+this.versionSearchString.length+1));
+  },
+  dataBrowser: [
+    {
+      string: navigator.userAgent,
+      subString: "Chrome",
+      identity: "Chrome"
+    },
+    {   string: navigator.userAgent,
+      subString: "OmniWeb",
+      versionSearch: "OmniWeb/",
+      identity: "OmniWeb"
+    },
+    {
+      string: navigator.vendor,
+      subString: "Apple",
+      identity: "Safari",
+      versionSearch: "Version"
+    },
+    {
+      prop: window.opera,
+      identity: "Opera",
+      versionSearch: "Version"
+    },
+    {
+      string: navigator.vendor,
+      subString: "iCab",
+      identity: "iCab"
+    },
+    {
+      string: navigator.vendor,
+      subString: "KDE",
+      identity: "Konqueror"
+    },
+    {
+      string: navigator.userAgent,
+      subString: "Firefox",
+      identity: "Firefox"
+    },
+    {
+      string: navigator.vendor,
+      subString: "Camino",
+      identity: "Camino"
+    },
+    {   // for newer Netscapes (6+)
+      string: navigator.userAgent,
+      subString: "Netscape",
+      identity: "Netscape"
+    },
+    {
+      string: navigator.userAgent,
+      subString: "MSIE",
+      identity: "Explorer",
+      versionSearch: "MSIE"
+    },
+    {
+      string: navigator.userAgent,
+      subString: "Gecko",
+      identity: "Mozilla",
+      versionSearch: "rv"
+    },
+    {     // for older Netscapes (4-)
+      string: navigator.userAgent,
+      subString: "Mozilla",
+      identity: "Netscape",
+      versionSearch: "Mozilla"
+    }
+  ],
+  dataOS : [
+    {
+      string: navigator.platform,
+      subString: "Win",
+      identity: "Windows"
+    },
+    {
+      string: navigator.platform,
+      subString: "Mac",
+      identity: "Mac"
+    },
+    {
+         string: navigator.userAgent,
+         subString: "iPhone",
+         identity: "iPhone/iPod"
+      },
+    {
+      string: navigator.platform,
+      subString: "Linux",
+      identity: "Linux"
+    }
+  ]
+
+};
+BrowserDetect.init();
+
 var forbiddenIds = ["A1E0GR2W1GJO0E","AEXYBW3COL9JM","A6UCL995Y1LFC","A21XD6CWE1JNMQ","A1FBO95OVBYOH1",
 "A2DZ3OFTXRZVNY","A1VO8E1TC7IJFY","AJOC8JZT3FEBF","AH31QLJ57XC8W","A38PKJM1ZRMDT8","A3NS1DN6J7Z3EU","A24F1UPER626KR",
 "A25D66AC4QUW2U","AUVC78LEL0T6L","A3HZ31VAGTVQMQ","A1VLZL3CA1WMPT","A2CKW83ERUX07J","A3JI3B5GTVA95F","A19WXHQSBB6P6",
@@ -119,6 +237,8 @@ var experiment = {
   AC1 : "Fail",
   AC2 : "Fail",
   condition: _.sample(["advisor","algorithm"]),
+  browser: BrowserDetect.browser,
+  mobile: "",
   face_order: _.shuffle([1, 2, 3, 4, 5, 6], 3),
   
   OutcomeTime: 1000,
@@ -904,6 +1024,7 @@ demographics: function() {
   experiment.gender = $('input[name="genderButton"]:checked').val();
   experiment.age = $("input[name = 'age']").val();
   experiment.comments = $('textarea[name="commentsTextArea"]').val();
+  experiment.mobile = $('input[name="mobileButton"]:checked').val();
   var checkboxValues = []
   $('input[type="checkbox"]:checked').each(function(index, elem) {
     checkboxValues.push($(elem).val());
