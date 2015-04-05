@@ -3,35 +3,13 @@
 	<title> Start Page </title>
 
 	<script src="https://www.stanford.edu/~ycleong/common/jquery-1.11.1.min.js"></script>
-	<script src="https://www.stanford.edu/~ycleong/common/mmturkey.js"></script>
+	<script src="mmturkey_new.js"></script>
 	<script src="https://cdn.jsdelivr.net/jstat/1.1.3/jstat.min.js"></script>
 	<script src="underscore-min.js"></script>
 	<link rel="stylesheet" href="style/style.css" />
-
-<!-- Desmonds way of hard-coding style elements in specific experiemnts
-<style type="text/css">
-.slide, #instructions, #wheel {
-    min-width: 1000px;
-}
-#wheel {
-    margin-left: auto ;
-    margin-right: auto ;
-}
-</style>
--->
-
 </head>
 
 <body>
-	<!-- Progress bar
-	<div class="progress" id="progressBar">
-	<div class="bar-wrapper">
-	  <div class="bar"></div>
-	</div>
-	<p>Progress bar: <span id="trial-num">{{}}</span><span>/</span><span id="total-num">{{}}</span></p>
-	</div>
--->
-
 <div class="slide" id="instructions">
 	<img src= "https://www.stanford.edu/~ycleong/common/stanford.png" alt="Stanford University">
 	<p id='logo-text'>Stanford Social Neuroscience Lab</p>
@@ -44,7 +22,7 @@
 		<strong>Please DO NOT complete this HIT using a mobile device.</strong> <br><br>You will not be able to complete this HIT using a mobile device. <br><br>
 
 
-			<button type="button" onclick="this.blur(); experiment.selfreport()">Start</button>
+			<button type="button" onclick="this.blur(); experiment.description()">Start</button>
 	<p class="block-text" id="legal">Legal information: By answering the
 		following questions, you are participating in a study being performed by
 		cognitive scientists in the Stanford Department of Psychology. If you have
@@ -337,7 +315,8 @@
 </div>
 
 <div class ="slide" id="end_screen">
-	<p id ="block-test"> You are done! You earned a bonus of <span id = "tally_id4">{{}}</span> cents. You will receive your bonus in 12-24 hours. Thank you so much for your time! </p>
+	<p id ="block-text"> You are done! You earned a bonus of <span id = "tally_id4">{{}}</span> cents. You will receive your bonus in 12-24 hours. Thank you so much for your time!</p>
+	<p id ="block-text"> If there are problems submitting, please take a screenshot of the error and contact the requester.</p> 
 </div>
 <script src="experiment.js"></script>
 

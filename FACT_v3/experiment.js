@@ -223,7 +223,7 @@ var experiment = {
   bonus: 0,
   AC1 : "Fail",
   AC2 : "Fail",
-  condition: "white", //_.sample(["white","black","algorithm"]),
+  condition: _.sample(["white","black","algorithm"]),
   browser: BrowserDetect.browser,
   mobile: "",
   face_order: _.shuffle([1, 2, 3, 4, 5, 6]),
