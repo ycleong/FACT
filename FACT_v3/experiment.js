@@ -193,19 +193,6 @@ function gen_pUP(trials){
   return pUP;
 }
 
-// Get Advisor Order
-function get_AdvisorOrder(){
-    AdvisorOrder = [[1,2,3,2,1,3,1,3,2,3,1,2,1,2,3,2,1,3,1,3],
-    [2,3,1,3,2,1,2,1,3,1,2,3,2,3,1,3,2,1,2,1],
-    [3,1,2,1,3,2,3,2,1,2,3,1,3,1,2,1,3,2,3,2]];
-
-    row_order = [0,1,2].shuffle();
-    
-    AdvisorOrder = AdvisorOrder[row_order[0]].concat(AdvisorOrder[row_order[1]],AdvisorOrder[row_order[2]]);
-    return AdvisorOrder
-}
-
-
 // Generate sequences of advisor outcomes
 function get_AdvisorCorrect(nTrials,PctCorrect){
   AdvisorCorrect = _.range(nTrials*PctCorrect).map(function(){return 1});
@@ -230,16 +217,16 @@ showSlide("instructions");
 
 var experiment = {
   nTrials_Private: 36,
-  nTrials_Social: 60,
-  nTrials_Joint: 60,
+  nTrials_Social: 36,
+  nTrials_Joint: 36,
   tally: 0,
   bonus: 0,
   AC1 : "Fail",
   AC2 : "Fail",
-  condition: _.sample(["advisor","algorithm"]),
+  condition: "white", //_.sample(["white","black","algorithm"]),
   browser: BrowserDetect.browser,
   mobile: "",
-  face_order: _.shuffle([1, 2, 3, 4, 5, 6], 3),
+  face_order: _.shuffle([1, 2, 3, 4, 5, 6]),
   
   OutcomeTime: 1000,
   MaxResponseTime: 4000,
@@ -313,13 +300,7 @@ startPrivate: function(){
   else 
     {var pUP_private = downs.concat(ups);}
 
-
   var trial_num = 0;
-  var parms_private = {
-    nTrials: nTrials,
-    pUP: pUP_private
-  }
-  experiment.dataPrivate.push(parms_private)
   experiment.choice_screen(pUP_private,"private",trial_num)
 },
 
@@ -417,19 +398,19 @@ player_outcome: function(outcome){
   $("#Outcome_text_id").html(outcome_text);
   $("#Outcome_points_id").html(outcome_points);
   showSlide("outcome_page")
-  },
+},
 
-  timeout_screen: function(this_pUP,pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct,Advisor2Correct,Advisor3Correct){
-  
-    switch(type){
+timeout_screen: function(this_pUP,pUP,type,trial_num,FaceOrder,AdvisorCorrect){
 
-      case "private":
-      var data = {
-        type: type,
-        trial_num: trial_num, 
-        pUP:this_pUP,
-        choice: NaN,
-        stock_outcome: NaN,
+  switch(type){
+
+    case "private":
+    var data = {
+      type: type,
+      trial_num: trial_num, 
+      pUP:this_pUP,
+      choice: NaN,
+      stock_outcome: NaN,
         outcome: NaN,
         rt: NaN,
         tally: experiment.tally
@@ -451,7 +432,6 @@ player_outcome: function(outcome){
         outcome: NaN,
         rt: NaN,
         tally: experiment.tally,
-        Advisor: NaN,
         Advice: NaN,
         AdvisorCorrect: NaN
       }
@@ -459,7 +439,7 @@ player_outcome: function(outcome){
 
       showSlide("slow")
       $(document).unbind("keydown");
-      setTimeout(function(){experiment.social_screen(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct,Advisor2Correct,Advisor3Correct);}, experiment.OutcomeTime)
+      setTimeout(function(){experiment.social_screen(pUP,type,trial_num,FaceOrder,AdvisorCorrect);}, experiment.OutcomeTime)
       break
 
     case "joint":
@@ -473,7 +453,6 @@ player_outcome: function(outcome){
         outcome: NaN,
         rt: NaN,
         tally: experiment.tally,
-        Advisor: NaN,
         Advice: NaN,
         AdvisorCorrect: NaN
       }
@@ -481,19 +460,14 @@ player_outcome: function(outcome){
 
       showSlide("slow")
       $(document).unbind("keydown");
-      setTimeout(function(){experiment.joint_screen(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct,Advisor2Correct,Advisor3Correct);}, experiment.OutcomeTime)
+      setTimeout(function(){experiment.joint_screen(pUP,type,trial_num,FaceOrder,AdvisorCorrect);}, experiment.OutcomeTime)
       break
     }
   },
 
-/*
-The function that gets called when the sequence is finished.
-*/
-
+//edited until here
 learn_description: function(){
-  if (experiment.condition == "advisor"){
-  face_prac = new Image();
-  face_prac.src = "images/face_prac.png";
+  if (experiment.condition == "white"){
 
   face1 = new Image();
   face2 = new Image();
@@ -502,15 +476,15 @@ learn_description: function(){
   face5 = new Image();
   face6 = new Image();
 
-  face1.src = "images/face1.png";
-  face2.src = "images/face2.png";
-  face3.src = "images/face3.png";
-  face4.src = "images/face4.png";
-  face5.src = "images/face5.png";
-  face6.src = "images/face6.png";
+  face1.src = "images/w1.png";
+  face2.src = "images/w2.png";
+  face3.src = "images/w3.png";
+  face4.src = "images/w4.png";
+  face5.src = "images/w5.png";
+  face6.src = "images/w6.png";
 
-  temp = "In Part 2 of the experiment, you will evaluate the performance of other analysts playing the task. " +
-  "In each time period, you will be presented with a photo of an analyst. " +
+  temp = "In Part 2 of the experiment, you will evaluate the performance another analyst playing the task. " +
+  "In each time period, you will be presented with a photo of him. " +
   "He will make a prediction about whether the stock will go up or go down. " +
   "Prior to seeing his prediction, you will have to guess if his prediction will be accurate.";
 
@@ -519,14 +493,50 @@ learn_description: function(){
   temp = "If you think he will make an accurate prediction, press Z to select FOR. " +
   "If you think he will make an inaccurate prediction, press M to select AGAINST.";
 
-  $("#end_private2").html(temp)
+  $("#end_private2").html(temp);
 
-  $("img.img_prac").attr("src", face_prac.src);
+  Ad1 = "images/w" + experiment.face_order[0] + ".png";
+
+  $("img.img_prac").attr("src", Ad1);
 
   $(".noun").html("analyst")
-} else {
-  frac_prac = new Image();
-  frac_prac.src = "images/frac_prac.png";
+
+} else if (experiment.condition == "black") {
+  face1 = new Image();
+  face2 = new Image();
+  face3 = new Image();
+  face4 = new Image();
+  face5 = new Image();
+  face6 = new Image();
+
+  face1.src = "images/b1.png";
+  face2.src = "images/b2.png";
+  face3.src = "images/b3.png";
+  face4.src = "images/b4.png";
+  face5.src = "images/b5.png";
+  face6.src = "images/b6.png";
+
+  temp = "In Part 2 of the experiment, you will evaluate the performance another analyst playing the task. " +
+  "In each time period, you will be presented with a photo of him. " +
+  "He will make a prediction about whether the stock will go up or go down. " +
+  "Prior to seeing his prediction, you will have to guess if his prediction will be accurate.";
+
+  $("#end_private1").html(temp);
+
+  temp = "If you think he will make an accurate prediction, press Z to select FOR. " +
+  "If you think he will make an inaccurate prediction, press M to select AGAINST.";
+
+  $("#end_private2").html(temp);
+
+  Ad1 = "images/w" + experiment.face_order[0] + ".png";
+
+  $("img.img_prac").attr("src", Ad1);
+
+  $(".noun").html("analyst") //edited until here
+
+}
+
+else if (experiment.condition == "algorithm") {
 
   frac1 = new Image();
   frac2 = new Image();
@@ -542,8 +552,6 @@ learn_description: function(){
   frac5.src = "images/frac5.png";
   frac6.src = "images/frac6.png";
 
-  //stop editing here to look for fractal iamges
-
   temp = "In Part 2 of the experiment, you will evaluate how well different computer algorithms predict the stock. " +
   "In each time period, you will be presented with an icon that represents a computer algorithm. " +
   "The algorithm will provide a prediction about whether the stock will go up or go down. " +
@@ -556,7 +564,9 @@ learn_description: function(){
 
   $("#end_private2").html(temp)
 
-  $("img.img_prac").attr("src", frac_prac.src);
+  Ad1 = "images/frac" + experiment.face_order[0] + ".png";
+
+  $("img.img_prac").attr("src", Ad1);
 
   $(".noun").html("algorithm")
 }
@@ -602,71 +612,40 @@ startSocial: function(){
   var nTrials = experiment.nTrials_Social;
   //var pUP_Social = gen_pUP(nTrials);
   
-  ups = _.range(15).map(function(){return 0.80});
-  downs = _.range(15).map(function(){return 0.20});
+  ups = _.range(18).map(function(){return 0.80});
+  downs = _.range(18).map(function(){return 0.20});
 
   if (Math.random() < 0.5)
-    {var pUP_Social = ups.concat(downs,ups,downs);}
+    {var pUP_Social = ups.concat(downs,ups);}
   else 
-    {var pUP_Social = downs.concat(ups,downs,ups);}
+    {var pUP_Social = downs.concat(ups,downs);}
 
   var trial_num = 0;  
-  var AdvisorOrder = get_AdvisorOrder();
   var FaceOrder = experiment.face_order;
-  var Advisor1Correct = get_AdvisorCorrect((nTrials/3),0.80);
-  var Advisor2Correct = get_AdvisorCorrect((nTrials/3),0.50);
-  var Advisor3Correct = get_AdvisorCorrect((nTrials/3),0.20);
+  var AdvisorCorrect = get_AdvisorCorrect(nTrials,0.50);
 
-  var parms_social = {
-    nTrials: nTrials,
-    pUP: pUP_Social,
-    AdvisorOrder: AdvisorOrder,
-    FaceOrder: FaceOrder,
-    Advisor1Correct: Advisor1Correct,
-    Advisor2Correct: Advisor2Correct,
-    Advisor3Correct: Advisor3Correct
-  }
-  experiment.dataSocial.push(parms_social)
-  experiment.social_screen(pUP_Social,"social",trial_num,FaceOrder,AdvisorOrder,Advisor1Correct,Advisor2Correct,Advisor3Correct)
+  experiment.social_screen(pUP_Social,"social",trial_num,FaceOrder,AdvisorCorrect)
 },
 
-social_screen: function(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct,Advisor2Correct,Advisor3Correct){
+social_screen: function(pUP,type,trial_num,FaceOrder,AdvisorCorrect){
   var startTime = (new Date()).getTime();
 
   showSlide("social_screen")
   trial_num = trial_num + 1;
 
-  var this_pUP = pUP.shift() ;
-  var this_Advisor = AdvisorOrder.shift();
+  var this_pUP = pUP.shift();
 
-  if (experiment.condition == "advisor"){
-    Ad1 = "face" + FaceOrder[0] + ".png";
-    Ad2 = "face" + FaceOrder[1] + ".png";
-    Ad3 = "face" + FaceOrder[2] + ".png";
-  } else {
+  if (experiment.condition == "white"){
+    Ad1 = "w" + FaceOrder[0] + ".png";
+  } else if (experiment.condition == "black") {
+    Ad1 = "b" + FaceOrder[0] + ".png";
+  } else if (experiment.condition == "algorithm") {
     Ad1 = "frac" + FaceOrder[0] + ".png";
-    Ad2 = "frac" + FaceOrder[1] + ".png";
-    Ad3 = "frac" + FaceOrder[2] + ".png";
   }
 
-  switch (this_Advisor) {
-    case 1:
-    $("img.AdvisorElement").attr("src", "images/" + Ad1);
-    this_AdvisorCorrect = Advisor1Correct.shift(); 
-    break
-
-
-    case 2:
-    $("img.AdvisorElement").attr("src", "images/" + Ad2);
-    this_AdvisorCorrect = Advisor2Correct.shift();  
-    break
-
-    case 3:
-    $("img.AdvisorElement").attr("src", "images/" + Ad3);
-    this_AdvisorCorrect = Advisor3Correct.shift();  
-    break
-  }
-
+  $("img.AdvisorElement").attr("src", "images/" + Ad1);
+  this_AdvisorCorrect = AdvisorCorrect.shift();
+  
   $(".left").show();
   $(".right").show();
 
@@ -687,9 +666,8 @@ social_screen: function(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correc
   $(".pUP_id").html(this_pUP);
   $(".StockOutcome_id").html([stock_outcome]);
   $(".trial_num_id").html(trial_num);
-  $(".advisor_id").html(this_Advisor); 
 
-  timeout = setTimeout(function(){experiment.timeout_screen(this_pUP,pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct,Advisor2Correct,Advisor3Correct)}, experiment.MaxResponseTime);
+  timeout = setTimeout(function(){experiment.timeout_screen(this_pUP,pUP,type,trial_num,FaceOrder,AdvisorCorrect)}, experiment.MaxResponseTime);
 
   $(document).keydown(function(event) {
     var keyCode = event.which;
@@ -712,7 +690,6 @@ social_screen: function(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correc
         outcome: outcome,
         rt: endTime - startTime,
         tally: experiment.tally,
-        Advisor: this_Advisor,
         Advice: Advice,
         AdvisorCorrect: this_AdvisorCorrect
       }
@@ -720,7 +697,7 @@ social_screen: function(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correc
        setTimeout(function(){experiment.advice_screen(Advice);}, experiment.OutcomeTime);
        setTimeout(function(){experiment.stock_outcome(stock_outcome);}, experiment.OutcomeTime*2);
        setTimeout(function(){experiment.player_outcome(outcome);}, experiment.OutcomeTime*3);
-       setTimeout(function(){experiment.social_screen(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct,Advisor2Correct,Advisor3Correct);}, experiment.OutcomeTime*4);
+       setTimeout(function(){experiment.social_screen(pUP,type,trial_num,FaceOrder,AdvisorCorrect);}, experiment.OutcomeTime*4);
        clearTimeout(timeout);
      }
      else if (keyCode == 77){
@@ -742,7 +719,6 @@ social_screen: function(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correc
         outcome: outcome,
         rt: endTime - startTime,
         tally: experiment.tally,
-        Advisor: this_Advisor,
         Advice: Advice,
         AdvisorCorrect: this_AdvisorCorrect
       }
@@ -750,7 +726,7 @@ social_screen: function(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correc
       setTimeout(function(){experiment.advice_screen(Advice);}, experiment.OutcomeTime);
       setTimeout(function(){experiment.stock_outcome(stock_outcome);}, experiment.OutcomeTime*2);
       setTimeout(function(){experiment.player_outcome(outcome);}, experiment.OutcomeTime*3);
-      setTimeout(function(){experiment.social_screen(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct,Advisor2Correct,Advisor3Correct);}, experiment.OutcomeTime*4);
+      setTimeout(function(){experiment.social_screen(pUP,type,trial_num,FaceOrder,AdvisorOrder,AdvisorCorrect);}, experiment.OutcomeTime*4);
       clearTimeout(timeout);
     }
   })
@@ -762,8 +738,6 @@ advice_screen: function(advice){
 },
 
 joint_description: function(){
-  face_prac = new Image();
-  face_prac.src = "images/face_prac.png";
 
   $("#tally_id2").html(experiment.tally);
   showSlide("end_social")
@@ -806,67 +780,39 @@ joint_description: function(){
   var nTrials = experiment.nTrials_Joint;
   //var pUP = gen_pUP(nTrials);
 
-    ups = _.range(nTrials/4).map(function(){return 0.80});
-  downs = _.range(nTrials/4).map(function(){return 0.20});
+    ups = _.range(18).map(function(){return 0.80});
+  downs = _.range(18).map(function(){return 0.20});
 
   if (Math.random() < 0.5)
-    {var pUP = ups.concat(downs,ups,downs);}
+    {var pUP = ups.concat(downs,ups);}
   else 
-    {var pUP = downs.concat(ups,downs,ups);}
+    {var pUP = downs.concat(ups,downs);}
   
   var trial_num = 0;  
-  var AdvisorOrder = get_AdvisorOrder();
   var FaceOrder = experiment.face_order;
-  var Advisor1Correct = get_AdvisorCorrect((nTrials/3),0.80);
-  var Advisor2Correct = get_AdvisorCorrect((nTrials/3),0.50);
-  var Advisor3Correct = get_AdvisorCorrect((nTrials/3),0.20);
+  var AdvisorCorrect = get_AdvisorCorrect(nTrials,0.50);
+
   document.getElementById("logo_pic").src = "images/logo3.png"
 
-  var parms_joint = {
-    nTrials: nTrials,
-    pUP: pUP,
-    AdvisorOrder: AdvisorOrder,
-    FaceOrder: FaceOrder,
-    Advisor1Correct: Advisor1Correct,
-    Advisor2Correct: Advisor2Correct,
-    Advisor3Correct: Advisor3Correct
-  }
-  experiment.dataJoint.push(parms_joint)
-  experiment.joint_screen(pUP,"joint",trial_num,FaceOrder,AdvisorOrder,Advisor1Correct,Advisor2Correct,Advisor3Correct)
+  experiment.joint_screen(pUP,"joint",trial_num,FaceOrder,AdvisorCorrect)
 },
 
-joint_screen: function(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct,Advisor2Correct,Advisor3Correct){
+joint_screen: function(pUP,type,trial_num,FaceOrder,AdvisorCorrect){
   var startTime = (new Date()).getTime();
   var this_pUP = pUP.shift() ;
-  var this_Advisor = AdvisorOrder.shift();
   trial_num = trial_num + 1;
   
-  if (experiment.condition == "advisor"){
-    Ad1 = "face" + FaceOrder[0] + ".png";
-    Ad2 = "face" + FaceOrder[1] + ".png";
-    Ad3 = "face" + FaceOrder[2] + ".png";
-  } else {
+  if (experiment.condition == "white"){
+    Ad1 = "w" + FaceOrder[0] + ".png";
+  } else if (experiment.condition == "black") {
+    Ad1 = "b" + FaceOrder[0] + ".png";
+  } else if (experiment.condition == "algorithm") {
     Ad1 = "frac" + FaceOrder[0] + ".png";
-    Ad2 = "frac" + FaceOrder[1] + ".png";
-    Ad3 = "frac" + FaceOrder[2] + ".png";
   }
 
-  switch (this_Advisor) {
-    case 1:
-    $("img.AdvisorElement").attr("src", "images/" + Ad1);
-    this_AdvisorCorrect = Advisor1Correct.shift(); 
-    break
+  $("img.AdvisorElement").attr("src", "images/" + Ad1);
+  this_AdvisorCorrect = AdvisorCorrect.shift(); 
 
-    case 2:
-    $("img.AdvisorElement").attr("src", "images/" + Ad2);
-    this_AdvisorCorrect = Advisor2Correct.shift();  
-    break
-
-    case 3:
-    $("img.AdvisorElement").attr("src", "images/" + Ad3);
-    this_AdvisorCorrect = Advisor3Correct.shift();  
-    break
-  }
 
   if (Math.random() < this_pUP)
     {var stock_outcome = 1;}
@@ -894,7 +840,7 @@ joint_screen: function(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct
   $(".trial_num_id").html(trial_num);
 
   setTimeout(function(){
-    timeout = setTimeout(function(){experiment.timeout_screen(this_pUP,pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct,Advisor2Correct,Advisor3Correct)}, experiment.MaxResponseTime);
+    timeout = setTimeout(function(){experiment.timeout_screen(this_pUP,pUP,type,trial_num,FaceOrder,AdvisorCorrect)}, experiment.MaxResponseTime);
     $(document).keydown(function(event) {
     var keyCode = event.which;
     if (keyCode == 90) {
@@ -916,7 +862,6 @@ joint_screen: function(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct
         outcome: outcome,
         rt: endTime - startTime,
         tally: experiment.tally,
-        Advisor: this_Advisor,
         Advice: Advice,
         AdvisorCorrect: this_AdvisorCorrect
       }
@@ -924,7 +869,7 @@ joint_screen: function(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct
 
        setTimeout(function(){experiment.stock_outcome(stock_outcome);}, experiment.OutcomeTime);
        setTimeout(function(){experiment.player_outcome(outcome);}, experiment.OutcomeTime*2);
-       setTimeout(function(){experiment.joint_screen(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct,Advisor2Correct,Advisor3Correct);}, experiment.OutcomeTime*3);
+       setTimeout(function(){experiment.joint_screen(pUP,type,trial_num,FaceOrder,AdvisorCorrect);}, experiment.OutcomeTime*3);
        clearTimeout(timeout);
      }
      else if (keyCode == 77){
@@ -945,14 +890,13 @@ joint_screen: function(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct
         outcome: outcome,
         rt: endTime - startTime,
         tally: experiment.tally,
-        Advisor: this_Advisor,
         Advice: Advice,
         AdvisorCorrect: this_AdvisorCorrect
       }
       experiment.dataJoint.push(data)
       setTimeout(function(){experiment.stock_outcome(stock_outcome);}, experiment.OutcomeTime);
       setTimeout(function(){experiment.player_outcome(outcome);}, experiment.OutcomeTime*2);
-      setTimeout(function(){experiment.joint_screen(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct,Advisor2Correct,Advisor3Correct);}, experiment.OutcomeTime*3);
+      setTimeout(function(){experiment.joint_screen(pUP,type,trial_num,FaceOrder,AdvisorCorrect);}, experiment.OutcomeTime*3);
       clearTimeout(timeout);
     }
   })
@@ -961,14 +905,21 @@ joint_screen: function(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct
 
 selfreport: function(){
   showSlide("selfreport");
-  if (experiment.condition == "advisor") {
-    document.getElementById("F1").src = "images/face1.png";
-    document.getElementById("F2").src = "images/face2.png";
-    document.getElementById("F3").src = "images/face3.png";
-    document.getElementById("F4").src = "images/face4.png";
-    document.getElementById("F5").src = "images/face5.png";
-    document.getElementById("F6").src = "images/face6.png";
-  } else {
+  if (experiment.condition == "white") {
+    document.getElementById("F1").src = "images/w1.png";
+    document.getElementById("F2").src = "images/w2.png";
+    document.getElementById("F3").src = "images/w3.png";
+    document.getElementById("F4").src = "images/w4.png";
+    document.getElementById("F5").src = "images/w5.png";
+    document.getElementById("F6").src = "images/w6.png";
+  } else if (experiment.condition == "black") {
+    document.getElementById("F1").src = "images/b1.png";
+    document.getElementById("F2").src = "images/b2.png";
+    document.getElementById("F3").src = "images/b3.png";
+    document.getElementById("F4").src = "images/b4.png";
+    document.getElementById("F5").src = "images/b5.png";
+    document.getElementById("F6").src = "images/b6.png";
+  } else if  (experiment.condition == "algorithm") {
     document.getElementById("F1").src = "images/frac1.png";
     document.getElementById("F2").src = "images/frac2.png";
     document.getElementById("F3").src = "images/frac3.png";
@@ -999,11 +950,11 @@ demographics: function() {
   faceacc[6] = $("input[name = 'face6acc']").val();
 
   analyst[0] = faceacc[experiment.face_order[0]];
-  analyst[1] = faceacc[experiment.face_order[1]];
-  analyst[2] = faceacc[experiment.face_order[2]];
-  foil[0] = faceacc[experiment.face_order[3]];
-  foil[1] = faceacc[experiment.face_order[4]];
-  foil[2] = faceacc[experiment.face_order[5]];
+  foil[0] = faceacc[experiment.face_order[1]];
+  foil[1] = faceacc[experiment.face_order[2]];
+  foil[2] = faceacc[experiment.face_order[3]];
+  foil[3] = faceacc[experiment.face_order[4]];
+  foil[4] = faceacc[experiment.face_order[5]];
 
   experiment.selfreport_data = {
     self: self,
@@ -1038,7 +989,7 @@ demographics: function() {
   /*
   Wait 1.5 seconds and then submit the whole experiment object to Mechanical Turk (mmturkey filters out the functions so we know we’re just submitting properties [i.e. data])
   */
-  setTimeout(function() {turk.submit(experiment);}, 1500);
+  setTimeout(function() {turk.submit(experiment);}, 1000);
   },
 
 };

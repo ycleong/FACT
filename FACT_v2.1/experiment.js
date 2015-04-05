@@ -419,7 +419,7 @@ player_outcome: function(outcome){
   showSlide("outcome_page")
   },
 
-  timeout_screen: function(this_pUP,pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct,Advisor2Correct,Advisor3Correct){
+  timeout_screen: function(this_pUP,pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct,Advisor2Correct,Advisor3Correct,this_Advisor){
   
     switch(type){
 
@@ -451,7 +451,7 @@ player_outcome: function(outcome){
         outcome: NaN,
         rt: NaN,
         tally: experiment.tally,
-        Advisor: NaN,
+        Advisor: this_Advisor,
         Advice: NaN,
         AdvisorCorrect: NaN
       }
@@ -473,7 +473,7 @@ player_outcome: function(outcome){
         outcome: NaN,
         rt: NaN,
         tally: experiment.tally,
-        Advisor: NaN,
+        Advisor: this_Advisor,
         Advice: NaN,
         AdvisorCorrect: NaN
       }
@@ -689,7 +689,7 @@ social_screen: function(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correc
   $(".trial_num_id").html(trial_num);
   $(".advisor_id").html(this_Advisor); 
 
-  timeout = setTimeout(function(){experiment.timeout_screen(this_pUP,pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct,Advisor2Correct,Advisor3Correct)}, experiment.MaxResponseTime);
+  timeout = setTimeout(function(){experiment.timeout_screen(this_pUP,pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct,Advisor2Correct,Advisor3Correct,this_Advisor)}, experiment.MaxResponseTime);
 
   $(document).keydown(function(event) {
     var keyCode = event.which;
@@ -894,7 +894,7 @@ joint_screen: function(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct
   $(".trial_num_id").html(trial_num);
 
   setTimeout(function(){
-    timeout = setTimeout(function(){experiment.timeout_screen(this_pUP,pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct,Advisor2Correct,Advisor3Correct)}, experiment.MaxResponseTime);
+    timeout = setTimeout(function(){experiment.timeout_screen(this_pUP,pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct,Advisor2Correct,Advisor3Correct,this_Advisor)}, experiment.MaxResponseTime);
     $(document).keydown(function(event) {
     var keyCode = event.which;
     if (keyCode == 90) {

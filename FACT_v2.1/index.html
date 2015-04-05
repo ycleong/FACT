@@ -1,0 +1,346 @@
+<html>
+<head>
+	<title> Start Page </title>
+
+	<script src="https://www.stanford.edu/~ycleong/common/jquery-1.11.1.min.js"></script>
+	<script src="https://www.stanford.edu/~ycleong/common/mmturkey.js"></script>
+	<script src="https://cdn.jsdelivr.net/jstat/1.1.3/jstat.min.js"></script>
+	<script src="underscore-min.js"></script>
+	<link rel="stylesheet" href="style/style.css" />
+
+<!-- Desmonds way of hard-coding style elements in specific experiemnts
+<style type="text/css">
+.slide, #instructions, #wheel {
+    min-width: 1000px;
+}
+#wheel {
+    margin-left: auto ;
+    margin-right: auto ;
+}
+</style>
+-->
+
+</head>
+
+<body>
+	<!-- Progress bar
+	<div class="progress" id="progressBar">
+	<div class="bar-wrapper">
+	  <div class="bar"></div>
+	</div>
+	<p>Progress bar: <span id="trial-num">{{}}</span><span>/</span><span id="total-num">{{}}</span></p>
+	</div>
+-->
+
+<div class="slide" id="instructions">
+	<img src= "https://www.stanford.edu/~ycleong/common/stanford.png" alt="Stanford University">
+	<p id='logo-text'>Stanford Social Neuroscience Lab</p>
+
+	<p class="block-text">
+		<span id="test"> </span>
+		In this experiment, we are interested in how people predict the price fluctuation of a stock based on its past performance. The experiment will take you around 20 minutes. We ask that you complete the experiment in one sitting. Please do not switch away from the screen during this time. You will be paid $1 for your time, and a bonus of up to $1.50 based on your performance on the task.</p>
+
+
+		<strong>Please DO NOT complete this HIT using a mobile device.</strong> <br><br>You will not be able to complete this HIT using a mobile device. <br><br>
+
+
+			<button type="button" onclick="this.blur(); experiment.description()">Start</button>
+	<p class="block-text" id="legal">Legal information: By answering the
+		following questions, you are participating in a study being performed by
+		cognitive scientists in the Stanford Department of Psychology. If you have
+		questions about this research, please contact <b>Yuan Chang Leong</b> at <a
+		href="mailto:ycleong@stanford.edu">ycleong@stanford.edu</a>. You must be at 
+		least 18 years old to participate. Your participation in this research is voluntary. 
+		You may decline to answer any or all of the following questions. You may decline
+		further participation, at any time, without adverse consequences. Your
+		anonymity is assured; the researchers who have requested your participation will 
+		not receive any personal information about you.</p>
+	</div>
+
+	<div class="hidden">
+		<script type="text/javascript">
+		<!--//--><![CDATA[//><!--
+		if (document.images) {
+			logo1 = new Image();
+			logo2 = new Image();
+			logo3 = new Image();
+			UP = new Image();
+			DOWN = new Image();
+			outcomes = new Image();
+
+			logo1.src = "images/logo1.png";
+			logo2.src = "images/logo2.png";
+			logo3.src = "images/logo3.png";
+			UP.src = "images/UP.png";
+			DOWN.src = "images/DOWN.png";
+			outcomes.src = "images/outcomes.png";
+		}
+		//--><!]]>
+		</script>
+	</div>
+
+
+	<div class="slide" id="description">
+		<p id='logo-text'>Instructions</p>
+		<p class="block-text"> Thank you for accepting this HIT. This experiment has three parts. In the the first part, you will play the role of an analyst of a stock brokerage firm. </p>
+
+		<p class ="block-text"> You have been assigned to follow the stock of the company "Enigma Inc.". Your job is to predict if the price of the stock will go UP or DOWN.</p>
+
+		<p class="block-text"> In each time period, you will see a screen like this: </p>
+
+		<p class = "logo"><img src = "images/logo1.png"></img></p>
+
+		<div class = "choice_pos"><div class = "left"> UP</div><div class = "right"> DOWN</div></div>
+
+		<p class="block-text"> If you think the stock will go UP in the next time period, press "Z" on your keyboard.</p> 
+
+		<p id='logo-text'>(Try it! Press Z to advance to the next page)</p>
+	</div>
+
+	<!-- Page 2 -->
+	<div class="slide" id="description2">
+
+		<p class = "logo"><img src = "images/logo1.png"></img></p>
+
+		<div class = "choice_pos"><div class = "left"> UP</div><div class = "right"> DOWN</div></div>
+
+		<p class="block-text"> If you think the stock will go DOWN in the next time period, press "M" on your keyboard</p> 
+
+		<p id='logo-text'>(Try it! Press M to advance to the next page)</p>
+	</div>
+
+
+	<!-- Page 3 -->
+	<div class="slide" id="description3">
+
+		<p class="block-text"> In the actual experiment, you will have less than 5 seconds to make your choice. After which, you will be shown the actual performance of the stock:  </p>
+
+		<img src = "images/outcomes.png"></img>
+
+		<p class="block-text"> If you guess correctly, you will win 4 cents. If you guess wrongly, you will lose 4 cents. This money will be a performance bonus on top of the $1 you will receive for this experiment. Try to earn as much extra money as possible.</p> 
+
+		<p class='block-text'>Tips: When the price of a stock is going up, it tends to keep going up (but not always) </p>
+
+		<p class='block-text'> When the price of a stock is going down, it tends to keep going down (but not always) </p>
+
+		<p class='block-text'> The likelihood that the price will go up or down changes from time to time. You will have to figure this out by tracking the stock's performance over time.</p>
+
+		<p class='block-text'> Whenever you feel ready to start the experiment, press "G" to proceed.</p>
+
+	</div>
+
+	<!--Choice Screen --> 
+
+	<div class="slide" id="choice_screen">
+		<p class = "logo"><br><img id = "logo_pic" src = "images/logo1.png"></img></p>
+
+		<div class = "choice_pos"><div class = "left"> UP</div><div class = "right"> DOWN</div>
+		</div>
+	</div>
+
+	<!-- UP -->
+	<div class="slide" id="UP_page">
+		<p class = "logo"><img src = "images/UP.png"></img></p>
+		<p class = 'logo-text'><span class = "green">The stock went up!</span></p>
+	</div>
+
+	<!-- DOWN -->
+	<div class="slide" id="DOWN_page">
+		<p class = "logo"><img src = "images/DOWN.png"></img></p>
+		<p class = 'logo-text'><span class = "red">The stock went down!</red></p>
+	</div>
+
+	<!-- Outcome -->
+	<div class="slide" id="outcome_page">
+		<p class='logo-text'><br><br><br><br><span id = "Outcome_text_id">{{}}</span></p>
+		<p class='logo-text'><span id = "Outcome_points_id">{{}}</span></p>
+	</div>
+
+	<!-- Too Slow -->
+	<div class ="slide" id="slow">
+		<p class = 'logo-text'>Timeout!<br><br> Please respond faster in the next time period.</p>
+	</div>
+
+	<!-- Learning Instructions -->
+	<div class ="slide" id="end_private">
+		<p class = 'block-text'>You are done with Part 1 of the experiment!</p>
+		<p class = 'block-text' id="end_private1">{{}}</p>
+		<p class = 'block-text' id ="end_private2">{{}}}</p>
+
+		<img class="img_prac" height = "220"><img>
+		<div class = "choice_pos"><div class = "left"> FOR</div><div class = "right"> AGAINST</div>
+		<p id='logo-text'><br>(Try it! Press either "Z" or "M" to continue)</p>
+		<div id = "learn1">
+			<p class = 'block-text'>You will then be shown the <span class = "noun">{{}}</span>'s prediction:</p>
+			<img class="img_prac" height = "220"><img>
+			<p class = 'logo-text'><span class = "red">predicts the stock will go down</red></p>
+			<p class = 'block-text'>Followed by the actual performance of the stock:</p>
+			<p class = "logo"><img src = "images/UP.png"></img></p>
+			<p class = 'logo-text'><span class = "green">The stock went up!</span></p>
+
+			<p class = 'block-text' id = "against">The <span class = "noun">{{}}</span> was incorrect. Since you voted AGAINST the <span class = "noun">{{}}</span>, you would be correct and earn 4 cents.</p>
+			<p class = 'block-text' id = "for">The <span class = "noun">{{}}</span> was incorrect. Since you voted FOR the <span class = "noun">{{}}</span>, you would be incorrect and lose 4 cents.</p>
+
+			<p class = 'block-text'>Remember, you are rewarded for correctly guessing if the <span class = "noun">{{}}</span> will make a correct prediction. The actual performance of the stock doesn't matter. In the actual experiment, you will see the choices of three <span class = "noun">{{}}</span>s. Some <span class = "noun">{{}}</span>s are more accurate than others. You will have to figure this out over time. Please do not press the "continue" button below. </p>
+
+		<p class='block-text'> Whenever you feel ready to start Part 2, press "G" to proceed. Again, please do not press the "continue" button.</p>
+
+		<button type="button" onclick="this.blur(); experiment.startSocial()">Continue</button>
+		</div> 
+	</div>
+</div>
+
+
+<!-- Advisor Screen -->
+<div class="slide" id="social_screen">
+	<p class = "logo"><br><img class="AdvisorElement" height = "220"></img></p>
+	<div class = "choice_pos"><div class = "left">FOR</div><div class = "right">AGAINST</div>
+	</div>
+</div>
+
+<!-- Predict_UP -->
+<div class="slide" id="predictUp_page">
+	<p class = "logo"><br>
+		<img class="AdvisorElement" height = "220"></img>
+	</p>
+	<p class = 'logo-text'><span class = "green">predicts the stock will go up</span></p>
+</div>
+
+<!-- Predict_DOWN -->
+<div class="slide" id="predictDown_page">
+	<p class = "logo"><br>
+		<img class="AdvisorElement" height = "220"></img>
+	</p>
+	<p class = 'logo-text'><span class = "red">predicts the stock will go down</red></p>
+</div>
+
+<!-- Joint Instructions -->
+<div class ="slide" id="end_social">
+	<p class = 'block-text'>You are done with Part 2 of the experiment!</p>
+
+	<p class = 'block-text'>In the final part of the experiment, you will again be predicting the price fluctuation of the stock based on its past performance. However, this time round, you will also see the predictions of the <span class = "noun">{{}}</span>s you evaluated in part 2. You will be following the stock of Rebel Fusion Industries.</p>
+
+	<p class = 'block-text'> At the start of each time period, you will be presented with the prediction of one of the <span class = "noun">{{}}</span>s you saw in Part 2.</p>
+
+	<img class="img_prac" height = "220"><img>
+
+	<p class = 'logo-text'><span class = "green">predicts the stock will go up</red></p>
+
+	<p class = 'block-text'>You will then be asked to make your own prediction about the stock:</p>
+
+	<p class = "logo"><img src = "images/logo3.png"></img></p>
+
+	<div class = "choice_pos"><div class = "left"> FOR</div><div class = "right"> AGAINST</div>
+	<p id='logo-text'><br>(Try it! Press either "Z" or "M" to continue)</p>
+	<div id = "joint1">
+		<p class = 'block-text'>Once you made your choice, you will be shown the actual performance of the stock.</p>
+		<p class = "logo"><img src = "images/UP.png"></img></p>
+		<p class = 'logo-text'><span class = "green">The stock went up!</span></p>
+
+		<p class = 'block-text'>Remember, you are rewarded for correctly guessing whether the stock goes UP or DOWN. Try to be as accurate as possible. Please do not press the "continue" button below.</p>
+
+		<p class='block-text'> Whenever you feel ready to start Part 3, press "G" to proceed. Again, please do not press the "continue" button.</p>
+
+		<button type="button" onclick="this.blur(); experiment.startJoint()">Continue</button>
+
+	</div> 
+</div>
+</div>
+
+<!-- Self Report -->
+<div class ="slide" id="selfreport">
+	<form name = "accuracy">
+		<p class = 'block-text'>1. How accurate do you think you were at predicting the stock (0-100%)?<br>
+			Please enter a number from 0 to 100: <br>
+			<input type="text" name="selfacc"><br>
+		</p>
+
+		<p class = 'block-text'>2. How accurate do you think the following <span class = "noun">{{}}</span>s were at predicting the stock (0-100%)? If you saw the <span class = "noun">{{}}</span> during this experiment, enter a number from 1-100. Otherwise, please leave the field BLANK. <br>
+		</p>
+
+		<table align="center">
+    <tr>
+        <td align = "center"><img height = "220" id="F1"></img></td>
+        <td align = "center"><img height = "220" id="F2"</img></td>
+        <td align = "center"><img height = "220" id="F3"></img></td>
+    </tr>
+
+    <tr>
+    	<td align = "center"><input type="text" name="face1acc"></td>
+    	<td align = "center"><input type="text" name="face2acc"></td>
+    	<td align = "center"><input type="text" name="face3acc"></td>
+    </tr>
+    <tr>
+    </tr>
+
+    <tr>
+    	<td align = "center"><img height = "220" id="F4"></img></td>
+    	<td align = "center"><img height = "220" id="F5"></img></td>
+    	<td align = "center"><img height = "220" id="F6"></img></td>
+    </tr>
+
+    <tr>
+    	<td align = "center"><input type="text" name="face4acc"></td>
+    	<td align = "center"><input type="text" name="face5acc"></td>
+    	<td align = "center"><input type="text" name="face6acc"></td>
+    </tr>
+
+
+    </table>
+			
+
+	</form>
+
+<button type="button" onclick="this.blur(); experiment.demographics()">Continue</button>
+</div>
+
+<div class ="slide" id="demographics">
+     <p class="block-text">You are done with the experiment! You earned a bonus of <span id = "tally_id3">{{}}</span> cents. Please answer the following questions and click submit to complete this hit. Thank you for your time and patience.</p>
+    
+    <div id="form">
+    <form name="gender">
+    <span>Gender:</span>&nbsp;&nbsp;
+    <input type="radio" name="genderButton" value="M" /><span id="opt">Male</span>&nbsp;&nbsp;
+    <input type="radio" name="genderButton" value="F" /><span id="opt">Female</span>
+    </form>
+    
+    <form name="age">
+    <span>Age: </span>&nbsp;&nbsp;
+    <input type="text" name="age" /><br />
+    </form>
+    
+    <form name="race">
+    <span>Racial/Ethnic Background: </span>&nbsp;&nbsp; <br/>
+    <input type="checkbox" name="race" value="white"/>&nbsp;White<br/>
+	<input type="checkbox" name="race" value="black"/>&nbsp;Black<br/> 
+	<input type="checkbox" name="race" value="hispanic"/>&nbsp;Hispanic<br/>
+	<input type="checkbox" name="race" value="asian"/>&nbsp;Asian<br/>  
+	<input type="checkbox" name="race" value="other"/>&nbsp;Other
+    </form>
+
+    <form name="mobile">
+    <span>Did you complete this hit using a mobile device?</span>&nbsp;&nbsp;
+    <input type="radio" name="mobileButton" value="Yes" /><span id="opt">Yes</span>&nbsp;&nbsp;
+    <input type="radio" name="mobileButton" value="No" /><span id="opt">No</span>
+    </form>
+
+    <form name="comments">
+    </br>    
+    <span> Please leave any comments or suggestions regarding this HIT (Optional): </span></br></br>
+    <TEXTAREA name="commentsTextArea" ROWS=10 COLS=50></TEXTAREA>
+    </br>
+    </form>
+    <button type="button" onclick="this.blur(); experiment.end();">Submit</button>
+
+   
+    </div>
+</div>
+
+<div class ="slide" id="end_screen">
+	<p id ="block-test"> You are done! You earned a bonus of <span id = "tally_id4">{{}}</span> cents. You will receive your bonus in 12-24 hours. Thank you so much for your time! </p>
+</div>
+<script src="experiment.js"></script>
+
+</body>
+</html>
+
