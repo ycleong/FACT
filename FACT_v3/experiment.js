@@ -483,7 +483,7 @@ learn_description: function(){
   face5.src = "images/w5.png";
   face6.src = "images/w6.png";
 
-  temp = "In Part 2 of the experiment, you will evaluate the performance another analyst playing the task. " +
+  temp = "In Part 2 of the experiment, you will evaluate the performance of another analyst playing the task. " +
   "In each time period, you will be presented with a photo of him. " +
   "He will make a prediction about whether the stock will go up or go down. " +
   "Prior to seeing his prediction, you will have to guess if his prediction will be accurate.";
@@ -516,7 +516,7 @@ learn_description: function(){
   face5.src = "images/b5.png";
   face6.src = "images/b6.png";
 
-  temp = "In Part 2 of the experiment, you will evaluate the performance another analyst playing the task. " +
+  temp = "In Part 2 of the experiment, you will evaluate the performance of another analyst playing the task. " +
   "In each time period, you will be presented with a photo of him. " +
   "He will make a prediction about whether the stock will go up or go down. " +
   "Prior to seeing his prediction, you will have to guess if his prediction will be accurate.";
@@ -528,7 +528,7 @@ learn_description: function(){
 
   $("#end_private2").html(temp);
 
-  Ad1 = "images/w" + experiment.face_order[0] + ".png";
+  Ad1 = "images/b" + experiment.face_order[0] + ".png";
 
   $("img.img_prac").attr("src", Ad1);
 
@@ -552,7 +552,7 @@ else if (experiment.condition == "algorithm") {
   frac5.src = "images/frac5.png";
   frac6.src = "images/frac6.png";
 
-  temp = "In Part 2 of the experiment, you will evaluate how well different computer algorithms predict the stock. " +
+  temp = "In Part 2 of the experiment, you will evaluate how well acomputer algorithm predicts the stock. " +
   "In each time period, you will be presented with an icon that represents a computer algorithm. " +
   "The algorithm will provide a prediction about whether the stock will go up or go down. " +
   "Prior to seeing this prediction, you will have to guess if the prediction will be accurate.";
@@ -616,9 +616,9 @@ startSocial: function(){
   downs = _.range(18).map(function(){return 0.20});
 
   if (Math.random() < 0.5)
-    {var pUP_Social = ups.concat(downs,ups);}
+    {var pUP_Social = ups.concat(downs);}
   else 
-    {var pUP_Social = downs.concat(ups,downs);}
+    {var pUP_Social = downs.concat(ups);}
 
   var trial_num = 0;  
   var FaceOrder = experiment.face_order;
@@ -726,7 +726,7 @@ social_screen: function(pUP,type,trial_num,FaceOrder,AdvisorCorrect){
       setTimeout(function(){experiment.advice_screen(Advice);}, experiment.OutcomeTime);
       setTimeout(function(){experiment.stock_outcome(stock_outcome);}, experiment.OutcomeTime*2);
       setTimeout(function(){experiment.player_outcome(outcome);}, experiment.OutcomeTime*3);
-      setTimeout(function(){experiment.social_screen(pUP,type,trial_num,FaceOrder,AdvisorOrder,AdvisorCorrect);}, experiment.OutcomeTime*4);
+      setTimeout(function(){experiment.social_screen(pUP,type,trial_num,FaceOrder,AdvisorCorrect);}, experiment.OutcomeTime*4);
       clearTimeout(timeout);
     }
   })
@@ -784,9 +784,9 @@ joint_description: function(){
   downs = _.range(18).map(function(){return 0.20});
 
   if (Math.random() < 0.5)
-    {var pUP = ups.concat(downs,ups);}
+    {var pUP = ups.concat(downs);}
   else 
-    {var pUP = downs.concat(ups,downs);}
+    {var pUP = downs.concat(ups);}
   
   var trial_num = 0;  
   var FaceOrder = experiment.face_order;
