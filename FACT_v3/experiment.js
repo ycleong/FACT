@@ -552,7 +552,7 @@ else if (experiment.condition == "algorithm") {
   frac5.src = "images/frac5.png";
   frac6.src = "images/frac6.png";
 
-  temp = "In Part 2 of the experiment, you will evaluate how well acomputer algorithm predicts the stock. " +
+  temp = "In Part 2 of the experiment, you will evaluate how well a computer algorithm predicts the stock. " +
   "In each time period, you will be presented with an icon that represents a computer algorithm. " +
   "The algorithm will provide a prediction about whether the stock will go up or go down. " +
   "Prior to seeing this prediction, you will have to guess if the prediction will be accurate.";
@@ -936,7 +936,7 @@ demographics: function() {
   foil = [];
   faceacc =[];
 
-  if (experiment.tally < 6) {bonus = 24;} else if (experiment.tally > 37){bonus=150;} else{bonus = experiment.tally*4}
+  if (experiment.tally < 6) {bonus = 30;} else if (experiment.tally > 20){bonus=100;} else{bonus = experiment.tally*5}
 
   $("#tally_id3").html(bonus);
 
@@ -969,7 +969,7 @@ demographics: function() {
   },
 
   end: function() {
-  if (experiment.tally < 6) {bonus = 24;} else if (experiment.tally > 37){bonus=150;} else{bonus = experiment.tally*4}
+  if (experiment.tally < 6) {bonus = 30;} else if (experiment.tally > 20){bonus=100;} else{bonus = experiment.tally*5}
   $("#tally_id4").html(bonus);
   experiment.bonus = bonus;
   experiment.gender = $('input[name="genderButton"]:checked').val();
@@ -989,7 +989,7 @@ demographics: function() {
   /*
   Wait 1.5 seconds and then submit the whole experiment object to Mechanical Turk (mmturkey filters out the functions so we know we’re just submitting properties [i.e. data])
   */
-  setTimeout(function() {turk.submit(experiment);}, 1000);
+  setTimeout(function() {turk.submit(experiment);}, 1200);
   },
 
 };
