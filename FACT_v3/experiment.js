@@ -936,7 +936,7 @@ demographics: function() {
   foil = [];
   faceacc =[];
 
-  if (experiment.tally < 6) {bonus = 30;} else if (experiment.tally > 20){bonus=100;} else{bonus = experiment.tally*5}
+  if (experiment.tally < 4) {bonus = 20;} else if (experiment.tally > 20){bonus=100;} else{bonus = experiment.tally*5}
 
   $("#tally_id3").html(bonus);
 
@@ -969,7 +969,7 @@ demographics: function() {
   },
 
   end: function() {
-  if (experiment.tally < 6) {bonus = 30;} else if (experiment.tally > 20){bonus=100;} else{bonus = experiment.tally*5}
+  if (experiment.tally < 4) {bonus = 20;} else if (experiment.tally > 20){bonus=100;} else{bonus = experiment.tally*5}
   $("#tally_id4").html(bonus);
   experiment.bonus = bonus;
   experiment.gender = $('input[name="genderButton"]:checked').val();
