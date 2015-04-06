@@ -393,7 +393,7 @@ stock_outcome: function(stock_outcome){
 
 player_outcome: function(outcome){
   var outcome_text = (outcome == 1) ? "You were correct!" : "Sorry, you were wrong.";
-  var outcome_points = (outcome == 1) ? "+ 4 cents" : "- 4 cents"
+  var outcome_points = (outcome == 1) ? "+ 5 cents" : "- 5 cents"
 
   $("#Outcome_text_id").html(outcome_text);
   $("#Outcome_points_id").html(outcome_points);
