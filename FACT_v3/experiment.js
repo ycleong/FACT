@@ -995,7 +995,7 @@ demographics: function() {
     if (_(forbiddenIds).contains(code)) {
       alert ( "You have done a version of this HIT before, please DO NOT accept this HIT." );
     } else {
-      alert ( "You are eligible for this HIT. Please feel free to continue.")
+      alert ( "You are eligible for this HIT. Please accept the hit and continue.")
     }
   },
 
