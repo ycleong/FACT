@@ -706,9 +706,9 @@ demographics: function(self,faceacc) {
   analyst = [];
   foil = [];
     
-  bonus = experiment.tally * 5 + 160;
+  bonus = experiment.tally * 5 + 180;
   if (bonus > 350){bonus = 350}
-  if (bonus < 200){bonus = 190 + _.sample([5,10,15,20])}
+  if (bonus < 200){bonus = 200 + _.sample([5,10,15,20])}
   experiment.bonus = bonus;
     
   bonus = experiment.bonus/100;
