@@ -482,6 +482,22 @@ social_screen: function(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correc
       $("#PlayerOutcome_id").html(outcome);
       experiment.tally = experiment.tally + outcome;
       var endTime = (new Date()).getTime();
+        
+        var pre_Advisor = AdvisorOrder[0];
+        
+          switch (pre_Advisor) {
+            case 1:
+                $("img.AdvisorElement").attr("src", "images/" + Ad1);
+                    break
+
+            case 2:
+                $("img.AdvisorElement").attr("src", "images/" + Ad2);
+                break
+
+            case 3:
+                $("img.AdvisorElement").attr("src", "images/" + Ad3);
+                break
+            }
 
       var data = {
         trial_num: trial_num, 
@@ -512,6 +528,23 @@ social_screen: function(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correc
       experiment.tally = experiment.tally + outcome;
       var endTime = (new Date()).getTime();
       
+                 var pre_Advisor = AdvisorOrder[0];
+        
+          switch (pre_Advisor) {
+            case 1:
+                $("img.AdvisorElement").attr("src", "images/" + Ad1);
+                    break
+
+            case 2:
+                $("img.AdvisorElement").attr("src", "images/" + Ad2);
+                break
+
+            case 3:
+                $("img.AdvisorElement").attr("src", "images/" + Ad3);
+                break
+            }
+
+         
       var data = {
         trial_num: trial_num, 
         pUP: this_pUP,
@@ -650,6 +683,24 @@ joint_screen: function(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct
       $("#PlayerOutcome_id").html(outcome);
       experiment.tally = experiment.tally + outcome;
       var endTime = (new Date()).getTime();
+        
+        
+    var pre_Advisor = AdvisorOrder[0];
+        
+          switch (pre_Advisor) {
+            case 1:
+                $("img.AdvisorElement").attr("src", "images/" + Ad1);
+                    break
+
+            case 2:
+                $("img.AdvisorElement").attr("src", "images/" + Ad2);
+                break
+
+            case 3:
+                $("img.AdvisorElement").attr("src", "images/" + Ad3);
+                break
+            }
+
 
       var data = {
         trial_num: trial_num, 
@@ -678,7 +729,24 @@ joint_screen: function(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct
       var outcome = (stock_outcome==1) ? -1:1;
       $("#PlayerOutcome_id").html(stock_outcome);
       experiment.tally = experiment.tally + outcome;
-      var endTime = (new Date()).getTime();
+      var endTime = (new Date()).getTime
+      
+      var pre_Advisor = AdvisorOrder[0];  
+          switch (pre_Advisor) {
+            case 1:
+                $("img.AdvisorElement").attr("src", "images/" + Ad1);
+                    break
+
+            case 2:
+                $("img.AdvisorElement").attr("src", "images/" + Ad2);
+                break
+
+            case 3:
+                $("img.AdvisorElement").attr("src", "images/" + Ad3);
+                break
+            }
+      
+      
       var data = {
         trial_num: trial_num, 
         pUP: this_pUP,
@@ -769,9 +837,9 @@ faceacc[6] = $('input[name="F6Button"]:checked').val();
   analyst = [];
   foil = [];
     
-  bonus = experiment.tally * 5 + 100;
+  bonus = experiment.tally * 5 + 150;
   if (bonus > 350){bonus = 350}
-  if (bonus < 135){bonus = 135 + _.sample([5,10,15,20])}
+  if (bonus < 130){bonus = 130 + _.sample([5,10,15,20])}
   experiment.bonus = bonus;
     
   bonus = experiment.bonus/100;
