@@ -767,9 +767,9 @@ faceacc[6] = $('input[name="F6Button"]:checked').val();
   analyst = [];
   foil = [];
     
-  bonus = experiment.tally * 5 + 150;
+  bonus = experiment.tally * 5 + 130;
   if (bonus > 350){bonus = 350}
-  if (bonus < 140){bonus = 140 + _.sample([5,10,15,20])}
+  if (bonus < 130){bonus = 130 + _.sample([5,10,15,20])}
   experiment.bonus = bonus;
     
   bonus = experiment.bonus/100;
