@@ -684,7 +684,7 @@ experiment.facestar = {
   }
   
 // Hacking bonus
-bonus = experiment.tally * 5 + 100;
+bonus = experiment.tally * 5 + 80;
 if (bonus > 200){bonus = 200}
 if (bonus < 100){bonus = 100 + _.sample([5,10,15,20])}
     
