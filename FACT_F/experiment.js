@@ -265,12 +265,12 @@ learn_description: function(){
   
   if (work_id == ""){
       experiment.condition = "female"
-      $(".ad_name").html('Donna')
+      $(".ad_name").html('Jessica')
       $(".ad_pronoun").html('she')
       $(".ad_pos_pronoun").html('her')
   } else if (rand_seed % 2){
       experiment.condition = "female"
-      $(".ad_name").html('Donna')
+      $(".ad_name").html('Jessica')
       $(".ad_pronoun").html('she')
       $(".ad_pos_pronoun").html('her')
   } else{ 
