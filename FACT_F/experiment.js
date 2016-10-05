@@ -9,8 +9,10 @@ Show the instructions slide — this is what we want subjects to see first.
 */
 
 showSlide("instructions");
+
+
 var experiment = {
-  nTrials_Private: 36,
+  nTrials_Private: 0,
   nTrials_Social: 20,
   nTrials_Joint: 20,
   tally: 0,
@@ -20,8 +22,6 @@ var experiment = {
   AC_final:[],
   AC_passed: "FAIL",
   thisAC_Ad:0,
-  
-  condition: "advisor",
   browser: BrowserDetect.browser,
   mobile: "",
   face_order: _.shuffle([1, 2, 3, 4, 5, 6]),
@@ -40,9 +40,9 @@ var experiment = {
   parmsPrivate:[],
   parmsSocial:[],
   parmsJoint:[],
-
+    
 // Goes to description slide
-description: function() {
+description: function() {    
   showSlide("description");
   if (turk.previewMode) {
     alert ( "Please accept the HIT before continuing." );
@@ -55,6 +55,8 @@ description: function() {
       setTimeout(experiment.description2, 500);
     }
   })
+  
+ 
 },
 
 description2: function() {
@@ -256,10 +258,40 @@ timeout_screen: function(this_pUP,pUP,type,trial_num,FaceOrder,AdvisorOrder,Advi
   },
 
 learn_description: function(){
+  
+  work_id = turk.workerId;
+  //work_id = "A24F1UPER626KR"
+  rand_seed = work_id.charCodeAt(work_id.length-1)
+  
+  if (work_id == ""){
+      experiment.condition = "female"
+      $(".ad_name").html('Donna')
+      $(".ad_pronoun").html('she')
+      $(".ad_pos_pronoun").html('her')
+  } else if (rand_seed % 2){
+      experiment.condition = "female"
+      $(".ad_name").html('Donna')
+      $(".ad_pronoun").html('she')
+      $(".ad_pos_pronoun").html('her')
+  } else{ 
+      experiment.condition = "male"
+      $(".ad_name").html('Donald')
+      $(".ad_pronoun").html('he')
+      $(".ad_pos_pronoun").html('his')
+  }
+
   showSlide("end_private")
+  
+  if (turk.previewMode) {
+    alert ( "Please accept the HIT before continuing." );
+  }
+    
+    
+    
 },
     
-learn_description2: function(){
+learn_description1_25: function(){
+  showSlide("end_private_1_25")
   face1 = new Image();
   face2 = new Image();
   face3 = new Image();
@@ -273,30 +305,55 @@ learn_description2: function(){
   face4.src = "images/face4.png";
   face5.src = "images/face5.png";
   face6.src = "images/face6.png";
+
+  male1 = new Image();
+  male2 = new Image();
+  male3 = new Image();
+  male4 = new Image();
+  male5 = new Image();
+  male6 = new Image();
     
-  showSlide("end_private2")
-  
+  male1.src = "images/male1.png";
+  male2.src = "images/male2.png";
+  male3.src = "images/male3.png";
+  male4.src = "images/male4.png";
+  male5.src = "images/male5.png";
+  male6.src = "images/male6.png";
+
   var FaceOrder = experiment.face_order;
-  $("img.img_prac").attr("src", "images/face" + FaceOrder[0] + ".png");
     
-  $(document).keydown(function(event) {
-    var keyCode = event.which;
+  if (experiment.condition == "female"){
+      $("img.img_prac").attr("src", "images/face" + FaceOrder[0] + ".png");
+  } else {
+      $("img.img_prac").attr("src", "images/male" + FaceOrder[0] + ".png");   
+  }
+    
+},    
+  learn_description1_5: function(){
+    showSlide("end_private1_5")  
+  },
 
-    if (keyCode == 90) {
-      $(document).unbind("keydown");
-      $(".right").hide();
-      $("#learn1").show();
-      $('#for').show();
-    }
+learn_description2: function(){
+    showSlide("end_private2")
+
+    $(document).keydown(function(event) {
+        var keyCode = event.which;
+
+        if (keyCode == 90) {
+            $(document).unbind("keydown");
+            $(".right").hide();
+            $("#learn1").show();
+            $('#for').show();
+        }
     
-    else if (keyCode == 77){
-      $(document).unbind("keydown");
-      $(".left").hide();
-      $("#learn1").show();
-      $('#against').show();
+        else if (keyCode == 77){
+            $(document).unbind("keydown");
+            $(".left").hide();
+            $("#learn1").show();
+            $('#against').show();
     }})
+    
 },
-
 
 ready_social: function(){
     showSlide("ready_social_screen")
@@ -333,19 +390,18 @@ social_screen: function(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correc
   var startTime = (new Date()).getTime();
   
   trial_num = trial_num + 1;
-  temp = trial_num + 36;
-  $(".trial_no").html(temp)
+  $(".trial_no").html(trial_num)
   var this_pUP = pUP.shift() ;
   var this_Advisor = AdvisorOrder.shift();
 
-  if (experiment.condition == "advisor"){
+  if (experiment.condition == "female"){
     Ad1 = "face" + FaceOrder[0] + ".png";
     Ad2 = "face" + FaceOrder[1] + ".png";
     Ad3 = "face" + FaceOrder[2] + ".png";
   } else {
-    Ad1 = "frac" + FaceOrder[0] + ".png";
-    Ad2 = "frac" + FaceOrder[1] + ".png";
-    Ad3 = "frac" + FaceOrder[2] + ".png";
+    Ad1 = "male" + FaceOrder[0] + ".png";
+    Ad2 = "male" + FaceOrder[1] + ".png";
+    Ad3 = "male" + FaceOrder[2] + ".png";
   }
 
   switch (this_Advisor) {
@@ -460,7 +516,7 @@ advice_screen: function(advice){
 joint_description: function(){
     
  Ad = experiment.face_order[0];
- $("img.Scheme3Element").attr("src", "images/scheme3_" + Ad +".png");
+ $("img.Scheme3Element").attr("src", "images/scheme3.png");
     
   showSlide("end_social")
         $(document).keydown(function(event) {
@@ -503,17 +559,17 @@ joint_screen: function(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct
   var this_Advisor = AdvisorOrder.shift();
     
   trial_num = trial_num + 1;
-  temp = trial_num + 56;
+  temp = trial_num + 20;
   $(".trial_no").html(temp)
   
-  if (experiment.condition == "advisor"){
+  if (experiment.condition == "female"){
     Ad1 = "face" + FaceOrder[0] + ".png";
     Ad2 = "face" + FaceOrder[1] + ".png";
     Ad3 = "face" + FaceOrder[2] + ".png";
   } else {
-    Ad1 = "frac" + FaceOrder[0] + ".png";
-    Ad2 = "frac" + FaceOrder[1] + ".png";
-    Ad3 = "frac" + FaceOrder[2] + ".png";
+    Ad1 = "male" + FaceOrder[0] + ".png";
+    Ad2 = "male" + FaceOrder[1] + ".png";
+    Ad3 = "male" + FaceOrder[2] + ".png";
   }
 
   switch (this_Advisor) {
@@ -556,6 +612,7 @@ joint_screen: function(pUP,type,trial_num,FaceOrder,AdvisorOrder,Advisor1Correct
 
   $(".pUP_id").html(this_pUP);
   $(".StockOutcome_id").html([stock_outcome]);
+  
   $(".trial_num_id").html(trial_num);
 
   setTimeout(function(){
@@ -635,10 +692,15 @@ check: function(){
 selfreport1: function(){
   $(".warning1").hide();
   showSlide("selfreport1");
-  
-  var F1_src = "images/face" + experiment.face_order[2] + ".png"
-  var F2_src = "images/face" + experiment.face_order[1] + ".png"
-  var F3_src = "images/face" + experiment.face_order[0] + ".png"
+  if (experiment.condition == "female"){
+    var F1_src = "images/face" + experiment.face_order[2] + ".png"
+    var F2_src = "images/face" + experiment.face_order[1] + ".png"
+    var F3_src = "images/face" + experiment.face_order[0] + ".png"
+    } else { 
+    var F1_src = "images/male" + experiment.face_order[2] + ".png"
+    var F2_src = "images/male" + experiment.face_order[1] + ".png"
+    var F3_src = "images/male" + experiment.face_order[0] + ".png"
+    }
     
   document.getElementById("F1").src = F1_src
   document.getElementById("F2").src = F2_src
@@ -660,16 +722,20 @@ recordanswer:function(){
     foil: foil,
   }
  
-  showSlide("selfreport2");  
-
+  showSlide("selfreport2"); 
+    
+if (experiment.condition == "female"){
   var mF1_src = "images/face" + experiment.face_order[2] + ".png"
   var mF2_src = "images/face" + experiment.face_order[0] + ".png"
   var mF3_src = "images/face" + experiment.face_order[1] + ".png"
-    
+  } else {
+  var mF1_src = "images/male" + experiment.face_order[2] + ".png"
+  var mF2_src = "images/male" + experiment.face_order[0] + ".png"
+  var mF3_src = "images/male" + experiment.face_order[1] + ".png"  
+}  
   document.getElementById("mF1").src = mF1_src
   document.getElementById("mF2").src = mF2_src
-  document.getElementById("mF3").src = mF3_src
-  
+  document.getElementById("mF3").src = mF3_src 
 },
     
 demographics: function() {
@@ -684,9 +750,9 @@ experiment.facestar = {
   }
   
 // Hacking bonus
-bonus = experiment.tally * 5 + 80;
-if (bonus > 200){bonus = 200}
-if (bonus < 100){bonus = 100 + _.sample([5,10,15,20])}
+bonus = experiment.tally * 5 + 110;
+if (bonus > 160){bonus = 160}
+if (bonus < 90){bonus = 90 + _.sample([5,10,15,20])}
     
   experiment.bonus = bonus;
   bonus = experiment.bonus/100;

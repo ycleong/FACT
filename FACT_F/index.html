@@ -21,12 +21,12 @@
 
 	<p class="block-text">
 		<span id="test"> </span>
-		In this experiment, we are interested in how people predict the price fluctuation of a stock based on its past performance. The experiment will take you around 15 minutes. We ask that you complete the experiment in one sitting. Please do not switch away from the screen during this time. You will be paid $1.00 for your time, and a bonus of up to $2.00 based on your performance on the task.</p>
+		In this experiment, we are interested in how people predict the price fluctuation of a stock based on its past performance. The experiment will take you around 10 minutes. We ask that you complete the experiment in one sitting. Please do not switch away from the screen during this time. You will be paid $0.80 for your time, and a bonus of up to $1.60 based on your performance on the task.</p>
         
 		<strong>Please DO NOT complete this HIT using a mobile device.</strong> <br><br>
 
 
-			<button type="button" onclick="this.blur(); experiment.description()">Start</button>
+			<button type="button" onclick="this.blur(); experiment.learn_description()">Start</button>
 	<p class="block-text" id="legal">Legal information: By answering the
 		following questions, you are participating in a study being performed by
 		cognitive scientists in the Stanford Department of Psychology. If you have
@@ -66,6 +66,8 @@
 		<p class="block-text"> Thank you for accepting this HIT! This study has three parts, with 76 "time periods". </p>
 
 		<p class ="block-text"> In part 1, you will be following the stock of the company "Enigma Inc." for 36 time periods. Your task is to predict if the price of the stock will go UP or DOWN in each time period.</p>
+        
+        
 
 		<p class="block-text"> In each time period, you will see a screen like this: </p>
 
@@ -129,7 +131,7 @@
 
 	<!--Choice Screen --> 
 	<div class="slide" id="choice_screen">
-    <p class="trial_index"> Time Period <span class = "trial_no">{X}</span> of 76 </p>
+    <p class="trial_index"> Time Period <span class = "trial_no">{X}</span> of 40 </p>
         <p class = "logo"><br><img id = "logo_pic" src = "images/logo1.png"></img></p>
 
 		<div class = "choice_pos"><div class = "left"> UP</div><div class = "right"> DOWN</div>
@@ -163,35 +165,48 @@
 		<p class = "big-font">Timeout!<br><br> Please respond faster in the next time period.</p>
 	</div>
 
-	<!-- Learning Instructions -->
-	<div class ="slide" id="end_private">
-        <p id='logo-text'>Instructions</p> 
-		<p class = 'block-text'>You are done with Part 1 of the experiment!</p>
+<!-- Learning Instructions -->
+<div class ="slide" id="end_private">
+<p id='logo-text'>Instructions</p> 
+<p class = 'block-text'>Thank you for accepting this HIT! This study has two parts, each with 20 "time periods". You start with an endowment of $0.70. In each time period, you will have the chance to win or lose 5 cents.</p>
+
+<p class="block-text"> The money you have at the end of the experiment will be a performance bonus <strong>on top of </strong> the $0.80 you will receive for this HIT. You can earn a performance bonus of <strong> up to $1.60.</strong> </p> 
+<button type="button" onclick="this.blur(); experiment.learn_description1_25()">Continue</button>
+</div>
         
-        <p class = 'block-text'>In Part 2 of the experiment, you will be following the stock of Jupiter Publishing Company for 20 time periods (until Time Period 56).</p> 
-        <p class = "logo"><img src = "images/logo2.png"></img></p>
-        <p class = "block-text">However, instead of making predictions about the stock, you will be <strong> betting on the predictions of someone else. </strong></p>
-<button type="button" onclick="this.blur(); experiment.learn_description2()">Continue</button>
-    </div>
+<!-- Learning Instructions 1.25 -->        
+<div class ="slide" id="end_private_1_25"> 
+        <p class = 'block-text'>In Part 1 of the experiment, you will be performing the HIT with <span class = "ad_name">{{}}</span>.</p>
+        <p><img class="img_prac" height = "220"></img></p>
+        
+<p class = 'block-text'>This is a photo of <span class = "ad_name">{{}}</span>.</p><p class = 'block-text'> <span class = "ad_name">{{}}</span> is 31 years old, and is married with two children. In <span class = "ad_pos_pronoun">{{}}</span> spare time, <span class = "ad_pronoun">{{}}</span> enjoys reading and hiking in the woods. </p>
+<button type="button" onclick="this.blur(); experiment.learn_description1_5()">Continue</button>
+</div>
+
+<!-- Learning Instructions 1.5-->
+    <div class ="slide" id="end_private1_5">
+    <p id='logo-text'>Instructions</p> 
+    <p class = "block-text">In each time period, <span class = "ad_name">{{}}</span> will make a prediction about whether the stock of Enigma Inc. will go up or go down. </p>
+    <p class = "logo"><img src = "images/logo1.png"></img></p>
     
+    <p class = "block-text">    
+    Prior to seeing <span class = "ad_name">{{}}</span>'s prediction, you will <strong>bet on whether <span class = "ad_pos_pronoun">{{}}</span> prediction will be accurate</strong>. If your bet is correct, you win 5 cents. Otherwise, you lose 5 cents.</p> 
+<button type="button" onclick="this.blur(); experiment.learn_description2()">Continue</button>
+</div>
+
+
     <!-- Learning Instructions 2-->
     <div class ="slide" id="end_private2">
-    <p id='logo-text'>Instructions</p> 
-    <p class = "block-text">In each time period, Donna (photo below) will make a prediction about whether the stock of Jupiter Publishing Company will go up or go down. </p>
-    <p class = "block-text">    
-        Prior to seeing Donna's prediction, you will <strong>bet on whether her prediction will be accurate</strong>.</p> 
-        
-    <p class = "block-text">If you think she will make an accurate prediction, press Z to select FOR. </p>
-    <p class = "block-text">If you think she will make an inaccurate prediction, press M to select AGAINST. </p> 
-    <p class = "block-text">You will have less than 5 seconds to make your bet.</p>
-
-		<img class="img_prac" height = "220"><img>
+    <p id='logo-text'>Instructions</p>         
+    <p class = "block-text">If you think <span class = "ad_name">{{}}</span> will make an accurate prediction, press Z to select FOR. </p>
+    <p class = "block-text">If you think <span class = "ad_name">{{}}</span> will make an inaccurate prediction, press M to select AGAINST. </p> 
+    <p><img class="img_prac" height = "220"></img></p>
         <div class = "choice_pos2"><div class = "left">FOR</div><div class = "right"> AGAINST</div></div>
         <p id='logo-text'><br>(Try it! Press either "Z" or "M" to continue)</p>
         <br>
         
         <div id = "learn1">
-			<p class = 'block-text'>You will then be shown her prediction:</p>
+			<p class = 'block-text'>You will then be shown <span class = "ad_pos_pronoun">{{}}</span> prediction:</p>
 			<img class="img_prac" height = "220"><img>
             
             <p class = 'logo-text'><span class = "red">predicts the stock will go down</red></p>
@@ -199,9 +214,9 @@
 			<p class = "logo"><img src = "images/UP.png"></img></p>
 			<p class = 'logo-text'><span class = "green">The stock went up!</span></p>
 
-			<p class = 'block-text' id = "against">In this time period, she was incorrect. Since you had bet AGAINST her prediction, you would be correct and earn 5 cents.</p>
+			<p class = 'block-text' id = "against">In this time period, <span class = "ad_pronoun">{{}}</span> was incorrect. Since you had bet AGAINST <span class = "ad_pos_pronoun">{{}}</span> prediction, you would be correct and earn 5 cents.</p>
 
-			<p class = 'block-text' id = "for">In this time period, she was incorrect. Since you had bet FOR her prediction, you would be incorrect and lose 5 cents.</p>
+			<p class = 'block-text' id = "for">In this time period, <span class = "ad_pronoun">{{}}</span> was incorrect. Since you had bet FOR <span class = "ad_pos_pronoun">{{}}</span> prediction, you would be incorrect and lose 5 cents.</p>
 
 <button type="button" onclick="this.blur(); experiment.ready_social()">Continue</button>
 </div>
@@ -211,18 +226,20 @@
 <div class ="slide" id="ready_social_screen">
     <p id='logo-text'>Instructions</p> 
     
-    <p class="block-text"> You will be betting on Donna's prediction for Jupiter Publishing House for 20 continuous time periods (until time period 56). After 20 time periods, you will receive instructions for the 3rd and final part of the HIT. </p>
+    <p class="block-text"> You will be betting on <span class = "ad_name">{{}}</span>'s prediction for Enigma Inc. for 20 continuous time periods. After 20 time periods, you will receive instructions for the 2nd part of the HIT. </p>
+    
+    <p class = "block-text">You will have less than 5 seconds to make each bet.</p>
         
-    <p class = 'block-text'>Remember, you are rewarded for <strong>correctly guessing if she makes a correct prediction</strong>. The actual performance of the stock doesn't matter.</p>
+    <p class = 'block-text'>Remember, you are rewarded for <strong>correctly guessing if <span class = "ad_pronoun">{{}}</span> makes a correct prediction</strong>. The actual performance of the stock doesn't matter.</p>
 
     <p class = 'block-text'>
-    Whenever you are ready, press "G" and we will begin Part 2. </p>
+    Whenever you are ready, press "G" and we will begin Part 1. </p>
 </div>
 
 
 <!-- Advisor Screen -->
 <div class="slide" id="social_screen">
-    <p class="trial_index"> Time Period <span class = "trial_no">{X}</span> of 76 </p>
+    <p class="trial_index"> Time Period <span class = "trial_no">{X}</span> of 40 </p>
     <img class="AdvisorElement" height = "220"></img>
 	<p><br><div class = "choice_pos"><div class = "left">FOR</div><div class = "right">AGAINST</div>
 </div></p>
@@ -230,14 +247,14 @@
 
 <!-- Predict_UP -->
 <div class="slide" id="predictUp_page">
-    <p class="trial_index"> Time Period <span class = "trial_no">{X}</span> of 76 </p>
+    <p class="trial_index"> Time Period <span class = "trial_no">{X}</span> of 40 </p>
     <img class="AdvisorElement" height = "220"></img>
 	<p class = "big-font"><span class = "green">predicts the stock will go up</span></p>
 </div>
 
 <!-- Predict_DOWN -->
 <div class="slide" id="predictDown_page">
-    <p class="trial_index"> Time Period <span class = "trial_no">{X}</span> of 76 </p>
+    <p class="trial_index"> Time Period <span class = "trial_no">{X}</span> of 40 </p>
     <img class="AdvisorElement" height = "220"></img>
 	<p class = "big-font"><span class = "red">predicts the stock will go down</red></p>
 </div>
@@ -246,16 +263,18 @@
 <div class ="slide" id="end_social">
     <p id='logo-text'>Instructions</p>
 	
-    <p class = 'block-text'>You have completed Part 2 of the HIT!</p>
+    <p class = 'block-text'>You have completed Part 1 of the HIT!</p>
 
-    <p class = 'block-text'>In this final part of the HIT, you are assigned to follow the stock of Rebel Fusion Gaming Industries. You will again be responsible for predicting the price fluctuation of the stock. However, this time round, you will also see recommendations from Donna. </p>
+    <p class = 'block-text'>In Part 2, <strong>you</strong> will be making predictions about the stock of Rebel Fusion Inc.</p>
 <img class="Scheme3Element" height = "220"></img>    
     
-<p class = 'block-text'> At the start of each time period, you will be presented with Donna's prediction. You will then be asked to make your prediction about the stock. Once you made your prediction, you will be shown the actual performance of the stock, followed by whether your prediction was correct. </p>
+<p class = 'block-text'> At the start of each time period, you will first be presented with <span class = "ad_name">{{}}</span>'s recommendation. You will then be asked to make your prediction about the stock (press Z to predict UP and M to predict DOWN). 
+<p class = 'block-text'>You can make your prediction based on trends in the price fluctuations, <span class = "ad_name">{{}}</span>'s recommendation, or some combination of the two. </p>
+<p class = 'block-text'> Once you made your prediction, you will be shown the actual performance of the stock, followed by whether your prediction was correct. </p>
 
-    <p class = 'block-text'>Remember, you are rewarded for correctly guessing whether the stock goes UP or DOWN. Try to be as accurate as possible. This is the final part of the experiment. Good luck!</p>
+<p class = 'block-text'>Remember, you are rewarded for correctly guessing whether the stock goes UP or DOWN. Try to be as accurate as possible. Good luck!</p>
 
-    <p class='block-text'> Whenever you feel ready to start Part 3, press "G" and we will begin.</p><br>
+    <p class='block-text'> Whenever you feel ready to start Part 2, press "G" and we will begin.</p><br>
 
 	</div> 
 </div>
@@ -270,7 +289,7 @@
         </p></form>
         <br>
 
-		<p class = 'block-text'>2. Please indicate how accurate you think Donna was at predicting the stock (0-100%). Please only indicate a value next to Donna's photo. Please leave the other fields blank. </p>
+		<p class = 'block-text'>2. Please indicate how accurate you think <span class = "ad_name">{{}}</span> was at predicting the stock (0-100%). Please only indicate a value next to <span class = "ad_name">{{}}</span>'s photo. Please leave the other fields blank. </p>
 <p class = 'block-text'>
     <table align="left" class = table-style>
     <tr>
@@ -305,13 +324,13 @@
 <div class ="slide" id="selfreport2">
     <p id='logo-text'>Please answer the following questions:</p>
 	<form name = "accuracy">
-		<p class = 'block-text'>Please give a star-rating (1-5) to Donna based on how well she predicted the stock:</p>
+		<p class = 'block-text'>Please give a star-rating (1-5) to <span class = "ad_name">{{}}</span> based on how well <span class = "ad_pronoun">{{}}</span> predicted the stock:</p>
 <p class = 'block-text'>
     <table align="left" class = table-style>
     <tr>
         <td align = "left"><img height = "200" id="mF1"></img></td>
         <td align = "left" width = 400px><form name="F1">
-        <input type="radio" name="F1Button" value=9 /><span id="opt">&nbsp;&nbsp;This is not Donna</span><br>
+        <input type="radio" name="F1Button" value=9 /><span id="opt">&nbsp;&nbsp;This is not <span class = "ad_name">{{}}</span></span><br>
         <br>
         <input type="radio" name="F1Button" value=5 /><span id="opt">&nbsp;&nbsp;5 stars</span><br>
         <input type="radio" name="F1Button" value=4 /><span id="opt">&nbsp;&nbsp;4 stars</span><br>
@@ -324,7 +343,7 @@
     <tr>
         <td align = "left"><img height = "200" id="mF2"></img></td>
         <td align = "left" width = 400px><form name="F2">
-        <input type="radio" name="F2Button" value=9 /><span id="opt">&nbsp;&nbsp;This is not Donna</span><br>
+        <input type="radio" name="F2Button" value=9 /><span id="opt">&nbsp;&nbsp;This is not <span class = "ad_name">{{}}</span></span><br>
         <br>
         <input type="radio" name="F2Button" value=5 /><span id="opt">&nbsp;&nbsp;5 stars</span><br>
         <input type="radio" name="F2Button" value=4 /><span id="opt">&nbsp;&nbsp;4 stars</span><br>
@@ -337,7 +356,7 @@
 <tr>
     <td align = "left"><img height = "200" id="mF3"></img></td>
     <td align = "left" width = 400px><form name="F3">
-    <input type="radio" name="F3Button" value=9 /><span id="opt">&nbsp;&nbsp;This is not Donna</span><br>
+    <input type="radio" name="F3Button" value=9 /><span id="opt">&nbsp;&nbsp;This is not <span class = "ad_name">{{}}</span></span><br>
     <br>    
     <input type="radio" name="F3Button" value=5 /><span id="opt">&nbsp;&nbsp;5 stars</span><br>
     <input type="radio" name="F3Button" value=4 /><span id="opt">&nbsp;&nbsp;4 stars</span><br>
