@@ -275,7 +275,7 @@ learn_description: function(){
       $(".ad_pos_pronoun").html('her')
   } else{ 
       experiment.condition = "male"
-      $(".ad_name").html('Donald')
+      $(".ad_name").html('Jake')
       $(".ad_pronoun").html('he')
       $(".ad_pos_pronoun").html('his')
   }
